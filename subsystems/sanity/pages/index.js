@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import Head from 'next/head'
 
-import { Card, JobTitle } from './components'
+import { Card, JobTitle } from '../components'
 
 import { Main, Button, Cards, Section, Hero, Container, Header, H1, H2, H3, Subtitle, Job, CloserSection, Link} from './styles'
 
-const Sanity = () => {
+const SanityPage = () => {
   const [ctaClicked, setCtaClicked] = useState(false);
 
   const ctaHandler = () => setCtaClicked(true);
@@ -25,8 +25,8 @@ const Sanity = () => {
             <Container>
               <H1>
                 <span>François</span>{" "}
-                <span class="emoji">
-                  <span class="glow">⚡️</span>
+                <span className="emoji">
+                  <span className="glow">⚡️</span>
                 </span>{" "}
                 <span>Sanity.io</span>
               </H1>
@@ -155,4 +155,4 @@ const Sanity = () => {
   );
 }
 
-export default Sanity
+export default SanityPage

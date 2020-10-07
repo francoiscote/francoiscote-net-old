@@ -1,4 +1,4 @@
-import { Header, H2, Subtitle } from '../styles'
+import { Header, H2, Subtitle } from '../pages/styles'
 
 const JobTitle = ({ company, title, dateRange }) => (
   <Header>
