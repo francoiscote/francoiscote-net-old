@@ -76,12 +76,12 @@ const SanityPage = () => {
                   <Link href="https://www.invisionapp.com/inside-design">
                     Inside Design
                   </Link>
-                  , the blog. From that point on I became the de-facto blog
+                  , our main blog. From that point on I became the de-facto blog
                   expert and I joined the company full-time.
                 </p>
                 <p>
                   During the last 12 months, I contributed to implement a new
-                  design system and building a fresh stack that runs on Next.js
+                  design system and build a fresh stack that runs on Next.js
                   and is backed by Sanity. We then built a self-serve system to
                   allow the Marketing team to publish{" "}
                   <Link href="https://www.invisionapp.com/lp/business-impact-design-forrester">
