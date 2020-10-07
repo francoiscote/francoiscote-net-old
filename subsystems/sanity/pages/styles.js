@@ -108,9 +108,9 @@ export const Hero = styled.div`
 `;
 
 export const Container = styled.div`
-  margin: 0 2eml;
+  margin: 0 2em;
   @media (min-width: 1000px) {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 `;
@@ -121,11 +121,14 @@ export const Header = styled.header`
 
 export const H1 = styled.h1`
   font-family: "Poppins", Arial, Helvetica, sans-serif;
-  font-size: 4em;
+  font-size: 3em;
+  @media (min-width: 780px) {
+    font-size: 4em;
+  }
   font-weight: 800;
 
   color: #a8dadc;
-  text-shadow: 0 0 6px rgba(228,243,244,0.4);
+  text-shadow: 0 0 6px rgba(228, 243, 244, 0.4);
 
   margin: 0 0 1em;
   padding: 0;
@@ -139,7 +142,10 @@ export const H2 = styled.h2`
   color: #1d3557;
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-weight: 600;
-  font-size: 2em;
+  font-size: 1.5em;
+  @media (min-width: 780px) {
+    font-size: 2em;
+  }
   line-height: 1.1;
   margin: 0 0 10px;
   padding: 0;
@@ -165,11 +171,63 @@ export const Subtitle = styled.p`
 `;
 
 export const Job = styled.div`
-  padding: 3em 0;
+  padding: 5em 0;
   margin: 1em 0;
+
+  @media (min-width: 780px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
 
   & + & {
     border-top: 1px solid #a2b4b5;
+  }
+`;
+
+export const JobTitleContainer = styled.div`
+  flex: 0 0 100%;
+  margin-bottom: 80px;
+  @media (min-width: 780px) {
+    margin-bottom: 1em;
+  }
+`;
+export const JobImage = styled.div`
+  flex: 0 1 40%;
+  text-align: center;
+  margin-bottom: 2em;
+  @media (min-width: 780px) {
+    margin-bottom: 0;
+  }
+
+  img {
+    margin: 0 auto;
+    width: 100%;
+    @media (min-width: 480px) {
+      width: 70%;
+    }
+    @media (min-width: 780px) {
+      width: 100%;
+    }
+    height: auto;
+
+    box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.2)
+  }
+
+  .flip & {
+    order: 2;
+  }
+`;
+export const JobContent = styled.div`
+  flex: 0 1 55%;
+
+  p {
+    margin: 0 0 1em;
+    line-height: 1.4;
+  }
+
+  .flip & {
+    order: 1;
   }
 `;
 
@@ -189,6 +247,8 @@ export const Button = styled.button`
   border: none;
   border-radius: 5px;
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.2);
+  font-family: sans-serif;
+  outline: none;
   padding: 20px;
   margin-top: 2em;
   background: #e63946;
