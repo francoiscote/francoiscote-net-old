@@ -1,11 +1,6 @@
-import {
-  Container
-} from '../../../styles/globals'
-
-
 const BeersPage = ({ beers }) => {
   console.log(beers)
-  
+
   const beerItems = beers.map( b => (
     <li key={`batch-${b.batchNo}`}>
       <h2>🍺 {b.recipe.name}</h2>
@@ -30,12 +25,12 @@ const BeersPage = ({ beers }) => {
   ))
 
   return (
-    <Container>
+    <div className="container">
       <h1>Beers</h1>
       <ul>
         {beerItems}
       </ul>
-    </Container>
+    </div>
   )
 }
 

@@ -1,8 +1,6 @@
 
-import { createGlobalStyle } from "styled-components";
 import Head from 'next/head'
 
-import '../styles/normalize.css'
 import '../styles/globals.css'
 
 const injectGA = () => {
@@ -14,7 +12,6 @@ const injectGA = () => {
     window.dataLayer.push(arguments);
   }
   gtag('js', new Date());
-
   gtag('config', 'UA-3186767-1');
 };
 
