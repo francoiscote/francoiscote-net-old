@@ -6,7 +6,7 @@ import {
 const BeersPage = ({ beers }) => {
   console.log(beers)
   const beerItems = beers.map( b => (
-    <li>
+    <li key={`batch-${b.batchNo}`}>
       <h2>🍺 {b.recipe.name}</h2>
     </li>
   ))
