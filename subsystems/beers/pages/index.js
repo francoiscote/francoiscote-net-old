@@ -25,12 +25,12 @@ const BeersPage = ({ beers }) => {
   ))
 
   return (
-    <div className="container">
+    <>
       <h1>Beers</h1>
       <ul>
         {beerItems}
       </ul>
-    </div>
+    </>
   )
 }
 

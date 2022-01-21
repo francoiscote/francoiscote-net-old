@@ -5,10 +5,22 @@ module.exports = {
     "./subsystems/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        'blink': 'blink 1200ms step-start 0s infinite'
+      },
+      keyframes: {
+        blink: {
+          '0%, 100%': { opacity: 0 },
+          '50%': { opacity: 1 }
+        }
+      }
+    },
     container: {
       center: true
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

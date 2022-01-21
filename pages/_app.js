@@ -1,5 +1,6 @@
 
 import Head from 'next/head'
+import Layout from '../components/layout'
 
 import '../styles/globals.css'
 
@@ -25,7 +26,9 @@ function App({ Component, pageProps }) {
         />
         <script>{injectGA()}</script>
       </Head>
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   )
 }
