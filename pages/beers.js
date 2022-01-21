@@ -9,10 +9,27 @@ export async function getServerSideProps(context) {
   const headers = {
     authorization: `Basic ${authString}`
   }
-  const res = await fetch(`${BREWFATHER_API_DOMAIN}/batches`, { headers })
-  const data = await res.json()
 
-  console.log({ data })
+  const includes = [
+    'batchNotes',
+    'batchFermentables',
+    'batchHops',
+    'batchYeasts',
+    'estimatedColor',
+    'estimatedIbu',
+    'fermentationStartDate',
+    'notes',
+    'measuredAbv',
+    'measuredBatchSize',
+    'measuredFg',
+    'measuredOg',
+    'recipe.style.name',
+    'status',
+    'tasteRating'
+  ]
+
+  const res = await fetch(`${BREWFATHER_API_DOMAIN}/batches?include=${includes.join(',')}`, { headers })
+  const data = await res.json()
 
   if (!data) {
     return {
