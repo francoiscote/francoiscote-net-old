@@ -5,9 +5,9 @@ export default function BeersPage({ beers }) {
 
   const beerItems = beers.map((b) => (
     <li key={`batch-${b.batchNo}`}>
-      <h2>🍺 {b.recipe.name}</h2>
+      <h2>{b.recipe.name}</h2>
       <div>
-        <ul>
+        <ul role="list">
           <li>Batch No: {b.batchNo}</li>
           <li>Status: {b.status}</li>
           <li>Brew Date: {b.brewDate}</li>
@@ -19,8 +19,8 @@ export default function BeersPage({ beers }) {
 
   return (
     <>
-      <h1>Beers</h1>
-      <ul>{beerItems}</ul>
+      <h1>🍺 Beers 🍺</h1>
+      <ul role="list">{beerItems}</ul>
     </>
   );
 }

@@ -1,14 +1,16 @@
-import styled from "styled-components";
+import styled from "@emotion/styled";
 
 export default function Layout({ children }) {
   return (
     <>
-      <StyledLayout>{children}</StyledLayout>
+      <Container>{children}</Container>
     </>
   );
 }
 
-const StyledLayout = styled.div`
+const Container = styled.div`
   max-width: 1400px;
   margin: 0 auto;
+  padding-left: var(--space-16);
+  padding-right: var(--space-16);
 `;

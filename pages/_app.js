@@ -1,7 +1,6 @@
 import Head from "next/head";
-import { ThemeProvider } from "styled-components";
-import GlobalStyle from "../components/GlobalStyle";
-import Layout from "../components/layout";
+import { globalStyles } from "../components/globalStyles";
+import Layout from "../components/Layout";
 
 const injectGA = () => {
   if (typeof window == "undefined") {
@@ -15,8 +14,6 @@ const injectGA = () => {
   gtag("config", "UA-3186767-1");
 };
 
-const theme = {};
-
 function App({ Component, pageProps }) {
   return (
     <>
@@ -27,12 +24,10 @@ function App({ Component, pageProps }) {
         />
         <script>{injectGA()}</script>
       </Head>
-      <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      {globalStyles}
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </>
   );
 }
