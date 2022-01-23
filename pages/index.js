@@ -20,7 +20,7 @@ export default function Home() {
           <StrongP>Montréal, Québec, Canada.</StrongP>
         </div>
         <StrongP>
-          <a href="https://www.github.com/francoiscote">Github</a>
+          <a href="https://www.github.com/francoiscote">GitHub</a>
         </StrongP>
       </div>
     </>
@@ -28,14 +28,12 @@ export default function Home() {
 }
 
 const HugeTitle = styled.h1`
-  background: linear-gradient(-10deg, var(--color-green), var(--color-black));
-  font-size: 6em;
+  font-size: var(--font-size-3xl);
   letter-spacing: -0.03em;
   background-clip: text;
   -webkit-background-clip: text;
-  color: rgba(0, 0, 0, 0);
 `;
 
 const StrongP = styled.p`
-  font-weight: bold;
+  font-weight: 500;
 `;
