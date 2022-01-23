@@ -1,23 +1,21 @@
-
-import Head from 'next/head'
-import { ThemeProvider } from 'styled-components'
-import GlobalStyle from '../components/GlobalStyle'
-import Layout from '../components/layout'
+import Head from "next/head";
+import { ThemeProvider } from "styled-components";
+import GlobalStyle from "../components/GlobalStyle";
+import Layout from "../components/layout";
 
 const injectGA = () => {
-  if (typeof window == 'undefined') {
+  if (typeof window == "undefined") {
     return;
   }
   window.dataLayer = window.dataLayer || [];
   function gtag() {
     window.dataLayer.push(arguments);
   }
-  gtag('js', new Date());
-  gtag('config', 'UA-3186767-1');
+  gtag("js", new Date());
+  gtag("config", "UA-3186767-1");
 };
 
-
-const theme = {}
+const theme = {};
 
 function App({ Component, pageProps }) {
   return (
@@ -36,7 +34,7 @@ function App({ Component, pageProps }) {
         </Layout>
       </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

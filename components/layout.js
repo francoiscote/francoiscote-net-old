@@ -1,9 +1,14 @@
-export default function Layout({children}) {
+import styled from "styled-components";
+
+export default function Layout({ children }) {
   return (
     <>
-      <div>
-        {children}
-      </div>
+      <StyledLayout>{children}</StyledLayout>
     </>
-  )
+  );
 }
+
+const StyledLayout = styled.div`
+  max-width: 1400px;
+  margin: 0 auto;
+`;
