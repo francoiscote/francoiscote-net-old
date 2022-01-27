@@ -5,10 +5,12 @@ export default function BeersPage({ beers }) {
 
   const beerItems = beers.map((b) => (
     <li key={`batch-${b.batchNo}`}>
-      <h2>{b.recipe.name}</h2>
+      <h2>
+        #{b.batchNo} - {b.recipe.name}
+      </h2>
       <div>
         <ul role="list">
-          <li>Batch No: {b.batchNo}</li>
+          <li>Style: {b.recipe.style.name}</li>
           <li>Status: {b.status}</li>
           <li>Brew Date: {b.brewDate}</li>
           <li>Notes: {b.batchNotes}</li>

@@ -38,9 +38,9 @@ export const globalStyles = (
         --space-160: 10rem;
 
         /* Fonts */
-        --font-body: system-ui, sans-serif;
+        --font-body: "DM Sans", sans-serif;
         --font-serif: ui-serif, serif;
-        --font-sans: sans-serif;
+        --font-sans: "DM Sans", sans-serif;
 
         /* Leading */
         --leading-tighter: 110%;

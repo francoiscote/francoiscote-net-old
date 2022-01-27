@@ -1,39 +1,32 @@
 import Head from "next/head";
 import styled from "@emotion/styled";
 
+import { NavBar } from "../components/NavBar";
+import { Title1, BigP, Strong } from "../components/Typography";
+
 export default function Home() {
   return (
     <>
       <Head>
         <title>francoiscote.net</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inconsolata&display=swap"
-          rel="stylesheet"
-        />
       </Head>
 
-      <div css={{ marginTop: "5em" }}>
-        <HugeTitle>François Côté</HugeTitle>
+      <NavBar />
+
+      <div css={{ textAlign: "center", marginTop: "var(--space-80)" }}>
+        <Title1>Bonjour,</Title1>
         <div css={{ marginBottom: "var(--space-12)" }}>
-          <StrongP>Web Developer</StrongP>
-          <StrongP>Montréal, Québec, Canada.</StrongP>
+          <BigP>
+            My name is <Strong>François Côté</Strong>,
+            <br />
+            and I am a <Strong>Web Developer</Strong> based in{" "}
+            <Strong>Montréal (QC), Canada</Strong>.
+          </BigP>
         </div>
-        <StrongP>
-          <a href="https://www.github.com/francoiscote">GitHub</a>
-        </StrongP>
+        <p css={{ marginTop: "var(--space-32)" }}>
+          <a href="https://www.github.com/francoiscote">github</a>
+        </p>
       </div>
     </>
   );
 }
-
-const HugeTitle = styled.h1`
-  font-size: var(--font-size-3xl);
-  letter-spacing: -0.03em;
-  background-clip: text;
-  -webkit-background-clip: text;
-`;
-
-const StrongP = styled.p`
-  font-weight: 500;
-`;
