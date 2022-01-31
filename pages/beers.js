@@ -1,23 +1,67 @@
 const BREWFATHER_API_DOMAIN = "https://api.brewfather.app/v1";
 
+import { Strong } from "../components/Typography";
+
 export default function BeersPage({ beers }) {
   console.log(beers);
 
-  const beerItems = beers.map((b) => (
-    <li key={`batch-${b.batchNo}`}>
-      <h2>
-        #{b.batchNo} - {b.recipe.name}
-      </h2>
-      <div>
-        <ul role="list">
-          <li>Style: {b.recipe.style.name}</li>
-          <li>Status: {b.status}</li>
-          <li>Brew Date: {b.brewDate}</li>
-          <li>Notes: {b.batchNotes}</li>
-        </ul>
-      </div>
-    </li>
-  ));
+  const beerItems = beers.map((b) => {
+    const brewDate = new Date(b.brewDate);
+
+    return (
+      <li key={`batch-${b.batchNo}`}>
+        <h2>
+          #{b.batchNo} - {b.recipe.name} ({b.recipe.style.name})
+        </h2>
+        <div>
+          <ul role="list">
+            <li>
+              <Strong>Status:</Strong> {b.status}
+            </li>
+
+            <li>
+              <Strong>Fermentables:</Strong>{" "}
+              {b.batchFermentables.map((y) => y.name).join(", ")}
+            </li>
+            <li>
+              <Strong>Hops: </Strong>{" "}
+              {b.batchHops.map((y) => y.name).join(", ")}
+            </li>
+            <li>
+              <Strong>Yeasts:</Strong>{" "}
+              {b.batchYeasts
+                .map(
+                  (y) =>
+                    `${y.laboratory} - ${y.name} ${
+                      y.productId ? `(${y.productId})` : ``
+                    }`
+                )
+                .join(", ")}
+            </li>
+
+            <li>
+              <Strong>IBU:</Strong> {b.estimatedIbu}
+            </li>
+            <li>
+              <Strong>ABV:</Strong> {b.measuredAbv}%
+            </li>
+            <li>
+              <Strong>OG:</Strong> {`${b.measuredOg}`.padEnd(5, 0)}
+            </li>
+            <li>
+              <Strong>Brew Date:</Strong> {brewDate.toDateString()}
+            </li>
+            {b.batchNotes && (
+              <li css={{ marginTop: "1em" }}>
+                <Strong>Notes:</Strong>{" "}
+                <div css={{ whiteSpace: "pre-wrap" }}>{b.batchNotes}</div>
+              </li>
+            )}
+          </ul>
+        </div>
+      </li>
+    );
+  });
 
   return (
     <>
