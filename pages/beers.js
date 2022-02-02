@@ -35,17 +35,31 @@ export async function getServerSideProps(context) {
     "tasteRating",
   ];
 
+  const batchesColors = {
+    1: '#805339',
+    2: '#e0b44c',
+    3: '#8aab60',
+    4: '#f5b290'
+  }
+
   const res = await fetch(
     `${BREWFATHER_API_DOMAIN}/batches?include=${includes.join(",")}`,
     { headers }
   );
-  const data = await res.json();
+  const rawData = await res.json();
 
-  if (!data) {
+  if (!rawData) {
     return {
-      norFound: true,
+      notFound: true,
     };
   }
+  
+  // Add colors data to beers
+  const data = rawData.map( b => {
+    const color = batchesColors[b.batchNo] || null;
+    return {...b, color}
+  })
+
 
   return {
     props: {

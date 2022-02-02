@@ -9,6 +9,7 @@ export const BeerCard = ({
   batchNotes,
   batchYeasts,
   bottlingDate,
+  color,
   estimatedIbu,
   measuredAbv,
   measuredFg,
@@ -25,7 +26,7 @@ export const BeerCard = ({
         <CardSection style={{ gridArea: "visual" }}>
           <SupTitle>Batch #{batchNo}</SupTitle>
           <PictureContainer>
-            <RandomCircle />
+            <ColorCircle css={{ backgroundColor: color }}/>
           </PictureContainer>
         </CardSection>
         <CardSection style={{ gridArea: "desc" }}>
@@ -156,11 +157,11 @@ const PictureContainer = styled.div`
   width: 100%;
   text-align: center;
 `;
-const RandomCircle = styled.div`
+const ColorCircle = styled.div`
   text-align: center;
   width: var(--space-160);
   height: var(--space-160);
-  background: var(--color-secondary);
+  background: var(--color-gray-300);
   border-radius: 500px;
   box-shadow: var(--box-shadow-base);
   margin-top: var(--space-24);
