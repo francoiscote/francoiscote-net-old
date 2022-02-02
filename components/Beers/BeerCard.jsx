@@ -24,7 +24,9 @@ export const BeerCard = ({
       <CardContainer>
         <CardSection style={{ gridArea: "visual" }}>
           <SupTitle>Batch #{batchNo}</SupTitle>
-          <pre>Picture here</pre>
+          <PictureContainer>
+            <RandomCircle />
+          </PictureContainer>
         </CardSection>
         <CardSection style={{ gridArea: "desc" }}>
           <span></span>
@@ -147,6 +149,23 @@ const CardContainer = styled.div`
 const CardSection = styled.section`
   padding: var(--space-16);
 `;
+
+const PictureContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
+`;
+const RandomCircle = styled.div`
+  text-align: center;
+  width: var(--space-160);
+  height: var(--space-160);
+  background: var(--color-secondary);
+  border-radius: 500px;
+  box-shadow: var(--box-shadow-base);
+  margin-top: var(--space-24);
+`;
+
 const SupTitle = styled.span`
   text-transform: uppercase;
   color: var(--color-gray-500);
@@ -207,7 +226,9 @@ const DataTitle = styled.div`
   font-size: var(--font-size-xs);
   font-weight: 600;
 `;
-const DataValue = styled.div``;
+const DataValue = styled.div`
+  color: var(--color-primary);
+`;
 
 const Hr = styled.hr`
   border-top: 1px solid var(--color-gray-200);
