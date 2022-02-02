@@ -1,75 +1,11 @@
+import Head from "next/head";
+import { beerItems } from "../components/Beers/BeerCard";
+
+import { NavBar } from "../components/NavBar";
+import { Title1 } from "../components/Typography";
+import { BeerCard } from "../components/Beers/BeerCard";
+
 const BREWFATHER_API_DOMAIN = "https://api.brewfather.app/v1";
-
-import { Strong } from "../components/Typography";
-
-export default function BeersPage({ beers }) {
-  console.log(beers);
-
-  const beerItems = beers.map((b) => {
-    const brewDate = new Date(b.brewDate);
-
-    return (
-      <li key={`batch-${b.batchNo}`}>
-        <h2>
-          #{b.batchNo} - {b.recipe.name} ({b.recipe.style.name})
-        </h2>
-        <div>
-          <ul role="list">
-            <li>
-              <Strong>Status:</Strong> {b.status}
-            </li>
-
-            <li>
-              <Strong>Fermentables:</Strong>{" "}
-              {b.batchFermentables.map((y) => y.name).join(", ")}
-            </li>
-            <li>
-              <Strong>Hops: </Strong>{" "}
-              {b.batchHops.map((y) => y.name).join(", ")}
-            </li>
-            <li>
-              <Strong>Yeasts:</Strong>{" "}
-              {b.batchYeasts
-                .map(
-                  (y) =>
-                    `${y.laboratory} - ${y.name} ${
-                      y.productId ? `(${y.productId})` : ``
-                    }`
-                )
-                .join(", ")}
-            </li>
-
-            <li>
-              <Strong>IBU:</Strong> {b.estimatedIbu}
-            </li>
-            <li>
-              <Strong>ABV:</Strong> {b.measuredAbv}%
-            </li>
-            <li>
-              <Strong>OG:</Strong> {`${b.measuredOg}`.padEnd(5, 0)}
-            </li>
-            <li>
-              <Strong>Brew Date:</Strong> {brewDate.toDateString()}
-            </li>
-            {b.batchNotes && (
-              <li css={{ marginTop: "1em" }}>
-                <Strong>Notes:</Strong>{" "}
-                <div css={{ whiteSpace: "pre-wrap" }}>{b.batchNotes}</div>
-              </li>
-            )}
-          </ul>
-        </div>
-      </li>
-    );
-  });
-
-  return (
-    <>
-      <h1>🍺 Beers 🍺</h1>
-      <ul role="list">{beerItems}</ul>
-    </>
-  );
-}
 
 // TODO: cache for rate-limit of 150 calls per hour on the API
 export async function getServerSideProps(context) {
@@ -86,9 +22,9 @@ export async function getServerSideProps(context) {
     "batchFermentables",
     "batchHops",
     "batchYeasts",
+    "bottlingDate",
     "estimatedColor",
     "estimatedIbu",
-    "fermentationStartDate",
     "notes",
     "measuredAbv",
     "measuredBatchSize",
@@ -116,4 +52,25 @@ export async function getServerSideProps(context) {
       beers: [...data],
     },
   };
+}
+
+export default function BeersPage({ beers }) {
+  console.log(beers);
+
+  return (
+    <>
+      <Head>
+        <title>Beers - francoiscote.net</title>
+      </Head>
+
+      <NavBar />
+
+      <Title1> Beers</Title1>
+      <ul role="list">
+        {beers.map((b, i) => (
+          <BeerCard key={`beer-${i}`} {...b} />
+        ))}
+      </ul>
+    </>
+  );
 }

@@ -1,27 +1,24 @@
 import styled from "@emotion/styled";
 import Link from "next/link";
-import { Container } from "./Container";
 
 export function NavBar() {
   return (
     <StyledNavBar>
-      <Container>
-        <NavBarContent>
-          <Link href="/">
-            <a
-              css={{
-                textDecoration: "none",
-                fontSize: "var(--font-size-md)",
-                cursor: "pointer",
-              }}
-              aria-label="home"
-            >
-              🌘
-            </a>
-          </Link>
-          {/* <div>TODO: Dark mode toggle</div> */}
-        </NavBarContent>
-      </Container>
+      <NavBarContent>
+        <Link href="/">
+          <a
+            css={{
+              textDecoration: "none",
+              fontSize: "var(--font-size-md)",
+              cursor: "pointer",
+            }}
+            aria-label="home"
+          >
+            🌘
+          </a>
+        </Link>
+        {/* <div>TODO: Dark mode toggle</div> */}
+      </NavBarContent>
     </StyledNavBar>
   );
 }

@@ -2,7 +2,6 @@ import Head from "next/head";
 import styled from "@emotion/styled";
 
 import { NavBar } from "../components/NavBar";
-import { Container } from "../components/Container";
 
 import { Title1, Title2, BigP, Strong } from "../components/Typography";
 
@@ -16,36 +15,34 @@ export default function Home() {
 
       <NavBar />
 
-      <Container>
-        <Title1>Styleguide</Title1>
-        <Section>
-          <Title2>Colors</Title2>
-          <Example>
-            <div css={{ display: "flex", justifyContent: "space-between" }}>
-              <ColorCard name="Black" hex="#212121" />
-              <ColorCard name="Primary" hex="#30475e" />
-              <ColorCard name="Secondary" hex="#f05454" />
-              <ColorCard name="White" hex="#F2F2F2" />
-            </div>
-          </Example>
-        </Section>
+      <Title1>Styleguide</Title1>
+      <Section>
+        <Title2>Colors</Title2>
+        <Example>
+          <div css={{ display: "flex", justifyContent: "space-between" }}>
+            <ColorCard name="Black" hex="#212121" />
+            <ColorCard name="Primary" hex="#30475e" />
+            <ColorCard name="Secondary" hex="#f05454" />
+            <ColorCard name="White" hex="#F2F2F2" />
+          </div>
+        </Example>
+      </Section>
 
-        <Section>
-          <Title2>Headings</Title2>
-          <Example>
-            <Title1>Heading 1</Title1>
-            <Title2>Heading 2</Title2>
-            <h3>Heading 3</h3>
-            <h4>Heading 4</h4>
-            <h5>Heading 5</h5>
-            <h6>Heading 6</h6>
-          </Example>
-        </Section>
+      <Section>
+        <Title2>Headings</Title2>
+        <Example>
+          <Title1>Heading 1</Title1>
+          <Title2>Heading 2</Title2>
+          <h3>Heading 3</h3>
+          <h4>Heading 4</h4>
+          <h5>Heading 5</h5>
+          <h6>Heading 6</h6>
+        </Example>
+      </Section>
 
-        <Section>
-          <Title2>Prose example</Title2>
-        </Section>
-      </Container>
+      <Section>
+        <Title2>Prose example</Title2>
+      </Section>
     </>
   );
 }
