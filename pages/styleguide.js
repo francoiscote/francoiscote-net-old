@@ -38,8 +38,23 @@ export default function Home() {
 
       <Section>
         <h2>Prose example</h2>
-        <p className="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci magna, eleifend suscipit ornare sed, consectetur vel purus. Etiam imperdiet urna sed hendrerit vehicula. Sed vitae purus magna. Sed eu pharetra ligula. Nam venenatis tincidunt tristique. In vel ornare nibh. Integer vestibulum tortor libero, ut interdum urna gravida sit amet. Curabitur accumsan ex nunc, ut eleifend est aliquam id. Vivamus eu cursus augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed non nisi felis. Vestibulum non ligula magna. Ut varius, urna vel convallis interdum, enim eros egestas purus, in aliquet diam tellus ut est. Mauris tincidunt vitae orci eu efficitur. Vestibulum at metus eu leo egestas sollicitudin eu vitae felis. Donec ullamcorper nibh quis placerat lobortis.</p>
+        <p className="lead">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci
+          magna, eleifend suscipit ornare sed, consectetur vel purus. Etiam
+          imperdiet urna sed hendrerit vehicula. Sed vitae purus magna. Sed eu
+          pharetra ligula. Nam venenatis tincidunt tristique. In vel ornare
+          nibh. Integer vestibulum tortor libero, ut interdum urna gravida sit
+          amet. Curabitur accumsan ex nunc, ut eleifend est aliquam id. Vivamus
+          eu cursus augue. Vestibulum ante ipsum primis in faucibus orci luctus
+          et ultrices posuere cubilia curae; Sed non nisi felis. Vestibulum non
+          ligula magna. Ut varius, urna vel convallis interdum, enim eros
+          egestas purus, in aliquet diam tellus ut est. Mauris tincidunt vitae
+          orci eu efficitur. Vestibulum at metus eu leo egestas sollicitudin eu
+          vitae felis. Donec ullamcorper nibh quis placerat lobortis.
+        </p>
       </Section>
     </>
   );
@@ -55,10 +70,8 @@ const ColorCard = ({ name, hex }) => (
   </div>
 );
 
-const Section = ({children}) => (
-  <div className="mb-16">{children}</div>
-)
+const Section = ({ children }) => <div className="mb-16">{children}</div>;
 
-const Example = ({children}) => (
+const Example = ({ children }) => (
   <div className="bg-white p-8 border border-gray-200 rounded">{children}</div>
-)
+);
