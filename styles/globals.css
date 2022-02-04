@@ -44,9 +44,9 @@
   }
 
   a {
-    @apply text-red-500 underline cursor-pointer;
+    @apply text-blue-600 cursor-pointer transition-colors;
   }
   a:hover {
-    @apply no-underline;
+    @apply underline text-blue-500;
   }
 }

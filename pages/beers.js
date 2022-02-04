@@ -1,5 +1,7 @@
 import Head from "next/head";
-import { beerItems } from "../components/Beers/BeerCard";
+
+import { groupBy } from "../lib/collections";
+import { capitalize } from "../lib/strings";
 
 import { NavBar } from "../components/NavBar";
 import { BeerCard } from "../components/Beers/BeerCard";
@@ -65,15 +67,30 @@ export async function getServerSideProps({ req, res }) {
     return { ...b, color };
   });
 
+  // Group by Status
+  const {
+    planning = [],
+    brewing = [],
+    fermenting = [],
+    conditioning = [],
+    completed = [],
+  } = groupBy(data, (b) => b.status.toLowerCase());
+
   return {
     props: {
-      beers: [...data],
+      beerStatuses: {
+        planning,
+        brewing,
+        fermenting,
+        conditioning,
+        completed,
+      },
     },
   };
 }
 
-export default function BeersPage({ beers }) {
-  console.log(beers);
+export default function BeersPage({ beerStatuses }) {
+  const statuses = Object.keys(beerStatuses);
 
   return (
     <>
@@ -84,10 +101,28 @@ export default function BeersPage({ beers }) {
       <NavBar />
 
       <main>
-        <h1> Beers</h1>
-        {beers.map((b, i) => (
-          <BeerCard key={`beer-${i}`} {...b} />
-        ))}
+        <h1> Beers 🍻</h1>
+        <p className="lead">
+          Sometimes, I brew beer.
+          <br />
+          Here is a live view of what I have in store based on the{" "}
+          <a href="https://brewfather.app/">Brewfather</a> API.
+        </p>
+        {statuses.map((s, i) => {
+          const beers = beerStatuses[s];
+          return (
+            <>
+              {beers.length > 0 && (
+                <section key={`status-${s}`} className="mt-20">
+                  <h3 className="mb-10">{capitalize(s)}</h3>
+                  {beers.map((b, i) => (
+                    <BeerCard key={`beer-${i}`} {...b} />
+                  ))}
+                </section>
+              )}
+            </>
+          );
+        })}
       </main>
     </>
   );

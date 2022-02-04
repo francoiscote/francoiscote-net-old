@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Link from "next/link";
 
 import { NavBar } from "../components/NavBar";
 import { GithubIcon } from "../components/icons/SocialMediaIcons";
@@ -25,10 +26,13 @@ export default function Home() {
         <div className="flex justify-center">
           <a
             href="https://www.github.com/francoiscote"
-            className="text-slate-400 hover:text-slate-500"
+            className="text-slate-400 hover:text-slate-500 mx-4"
           >
             <GithubIcon className="h-7 w-7 transition-colors" />
           </a>
+          <Link href="/beers">
+            <a className="text-3xl hover:no-underline mx-4 -mt-1">🍻</a>
+          </Link>
         </div>
       </div>
     </>
