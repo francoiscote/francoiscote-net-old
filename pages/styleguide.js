@@ -1,9 +1,6 @@
 import Head from "next/head";
-import styled from "@emotion/styled";
 
 import { NavBar } from "../components/NavBar";
-
-import { Title1, Title2, BigP, Strong } from "../components/Typography";
 
 export default function Home() {
   return (
@@ -15,11 +12,11 @@ export default function Home() {
 
       <NavBar />
 
-      <Title1>Styleguide</Title1>
+      <h1>Styleguide</h1>
       <Section>
-        <Title2>Colors</Title2>
+        <h2>Colors</h2>
         <Example>
-          <div css={{ display: "flex", justifyContent: "space-between" }}>
+          <div className="flex justify-between">
             <ColorCard name="Black" hex="#212121" />
             <ColorCard name="Primary" hex="#30475e" />
             <ColorCard name="Secondary" hex="#f05454" />
@@ -29,10 +26,9 @@ export default function Home() {
       </Section>
 
       <Section>
-        <Title2>Headings</Title2>
         <Example>
-          <Title1>Heading 1</Title1>
-          <Title2>Heading 2</Title2>
+          <h1>Heading 1</h1>
+          <h2>Heading 2</h2>
           <h3>Heading 3</h3>
           <h4>Heading 4</h4>
           <h5>Heading 5</h5>
@@ -41,7 +37,9 @@ export default function Home() {
       </Section>
 
       <Section>
-        <Title2>Prose example</Title2>
+        <h2>Prose example</h2>
+        <p className="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci magna, eleifend suscipit ornare sed, consectetur vel purus. Etiam imperdiet urna sed hendrerit vehicula. Sed vitae purus magna. Sed eu pharetra ligula. Nam venenatis tincidunt tristique. In vel ornare nibh. Integer vestibulum tortor libero, ut interdum urna gravida sit amet. Curabitur accumsan ex nunc, ut eleifend est aliquam id. Vivamus eu cursus augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed non nisi felis. Vestibulum non ligula magna. Ut varius, urna vel convallis interdum, enim eros egestas purus, in aliquet diam tellus ut est. Mauris tincidunt vitae orci eu efficitur. Vestibulum at metus eu leo egestas sollicitudin eu vitae felis. Donec ullamcorper nibh quis placerat lobortis.</p>
       </Section>
     </>
   );
@@ -50,32 +48,17 @@ export default function Home() {
 const ColorCard = ({ name, hex }) => (
   <div>
     <div
-      css={{
-        height: "var(--space-80)",
-        width: "var(--space-80)",
-        borderRadius: "var(--border-radius-sm)",
-        border: "1px solid var(--color-gray-200)",
-        background: hex,
-      }}
+      className="w-20 h-20 rounded border-gray-200"
+      style={{ background: hex }}
     />
-    <p css={{ fontSize: "var(--font-size-sm)" }}>{name}</p>
+    <p className="font-sm">{name}</p>
   </div>
 );
 
-const Swatch = styled.div`
-  height: var(--space-80);
-  width: var(--space-80);
-  border-radius: var(--border-radius-sm);
-  border: 1px solid var(--color-gray-200);
-`;
+const Section = ({children}) => (
+  <div className="mb-16">{children}</div>
+)
 
-const Section = styled.div`
-  margin-top: var(--space-64);
-`;
-
-const Example = styled.div`
-  background: #fff;
-  padding: var(--space-32);
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--border-radius-base);
-`;
+const Example = ({children}) => (
+  <div className="bg-white p-8 border border-gray-200 rounded">{children}</div>
+)

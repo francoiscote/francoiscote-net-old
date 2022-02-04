@@ -18,7 +18,7 @@ class CustomDocument extends Document {
             crossOrigin="true"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap"
             rel="stylesheet"
           />
         </Head>

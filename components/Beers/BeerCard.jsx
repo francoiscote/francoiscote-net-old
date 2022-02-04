@@ -1,6 +1,3 @@
-import styled from "@emotion/styled";
-import { Title1, Strong } from "../Typography";
-
 export const BeerCard = ({
   brewDate,
   batchNo,
@@ -21,44 +18,40 @@ export const BeerCard = ({
   const formatedBottlingDate = new Date(bottlingDate).toDateString();
 
   return (
-    <Card key={`batch-${batchNo}`}>
-      <CardContainer>
-        <CardSection style={{ gridArea: "visual" }}>
+    <article key={`batch-${batchNo}`} className="bg-gradient-to-br from-slate-50 to-white border border-gray-200 rounded-lg shadow-md p-6 mb-16">
+      <div 
+        className="grid grid-cols-12 gap-4 auto-rows-auto" 
+      >
+        <div className="p-4 col-span-3">
           <SupTitle>Batch #{batchNo}</SupTitle>
-          <PictureContainer>
-            <ColorCircle css={{ backgroundColor: color }}/>
-          </PictureContainer>
-        </CardSection>
-        <CardSection style={{ gridArea: "desc" }}>
-          <span></span>
+          <div className="flex justify-center text-center">
+            <ColorCircle style={{ backgroundColor: color }}/>
+          </div>
+        </div>
+        <div className="p-4 col-span-6">
           <SupTitle>{recipe.style.name}</SupTitle>
-          <BeerName>{recipe.name}</BeerName>
+          <h2 className="uppercase">{recipe.name}</h2>
 
-          <Ingredients role="list">
-            <IngredientType>
-              <IngredientTitle>Fermentables</IngredientTitle>
-              <IngredientValue>
-                <ul>
+          <div className="grid grid-cols-3 gap-4 mb-6" role="list">
+            <div>
+              <h3 className="text-base tracking-normal uppercase font-semibold">Fermentables</h3>
+                <ul className="text-sm">
                   {batchFermentables.map((y) => (
                     <li key={y.name}>{y.name}</li>
                   ))}
                 </ul>
-              </IngredientValue>
-            </IngredientType>
-            <IngredientType>
-              <IngredientTitle>Hops</IngredientTitle>
-              <IngredientValue>
-                <ul>
+            </div>
+            <div>
+              <h3 className="text-base tracking-normal uppercase font-semibold">Hops</h3>
+                <ul className="text-sm">
                   {batchHops.map((y) => (
                     <li key={y.name}>{y.name}</li>
                   ))}
                 </ul>
-              </IngredientValue>
-            </IngredientType>
-            <IngredientType>
-              <IngredientTitle>Yeasts</IngredientTitle>
-              <IngredientValue>
-                <ul>
+            </div>
+            <div>
+              <h3 className="text-base tracking-normal uppercase font-semibold">Yeasts</h3>
+                <ul className="text-sm">
                   {batchYeasts.map((y) => (
                     <li key={y.name}>
                       {y.laboratory} - {y.name}
@@ -66,173 +59,75 @@ export const BeerCard = ({
                     </li>
                   ))}
                 </ul>
-              </IngredientValue>
-            </IngredientType>
-          </Ingredients>
+            </div>
+          </div>
 
           {batchNotes && (
             <>
-              <h3>Notes:</h3>{" "}
-              <div css={{ whiteSpace: "pre-wrap" }}>{batchNotes}</div>
+              <h3 className="text-base tracking-normal uppercase font-semibold">Notes</h3>{" "}
+              <div style={{ whiteSpace: "pre-wrap" }}>{batchNotes}</div>
             </>
           )}
-        </CardSection>
-        <CardSection style={{ gridArea: "data" }}>
-          <DataList>
+        </div>
+        <div className="p-4 col-span-3">
+          <ul>
             {status && (
-              <DataItem>
-                <DataTitle>Status</DataTitle>
-                <DataValue>{status}</DataValue>
-              </DataItem>
+              <div className="mb-6">
+                <SupTitle>Status</SupTitle>
+                <div>{status}</div>
+              </div>
             )}
             {formatedBrewDate && (
-              <DataItem>
-                <DataTitle>Brew Date</DataTitle>
-                <DataValue>{formatedBrewDate}</DataValue>
-              </DataItem>
+              <div className="mb-6">
+                <SupTitle>Brew Date</SupTitle>
+                <div>{formatedBrewDate}</div>
+              </div>
             )}
             {formatedBottlingDate && (
-              <DataItem>
-                <DataTitle>Bottling Date</DataTitle>
-                <DataValue>{formatedBottlingDate}</DataValue>
-              </DataItem>
+              <div className="mb-6">
+                <SupTitle>Bottling Date</SupTitle>
+                <div>{formatedBottlingDate}</div>
+              </div>
             )}
-          </DataList>
-          <Hr />
-          <DataGrid>
+          </ul>
+          <hr className="border-top-gray-200 my-10"/>
+          <div className="grid grid-cols-2">
             {estimatedIbu && (
-              <DataItem>
-                <DataTitle>IBU</DataTitle>
-                <DataValue>{estimatedIbu}</DataValue>
-              </DataItem>
+              <div className="mb-4">
+                <SupTitle>IBU</SupTitle>
+                <div>{estimatedIbu}</div>
+              </div>
             )}
             {measuredAbv && (
-              <DataItem>
-                <DataTitle>ABV</DataTitle>
-                <DataValue>{measuredAbv}%</DataValue>
-              </DataItem>
+              <div className="mb-4">
+                <SupTitle>ABV</SupTitle>
+                <div>{measuredAbv}%</div>
+              </div>
             )}
             {measuredOg && (
-              <DataItem>
-                <DataTitle>OG</DataTitle>
-                <DataValue>{`${measuredOg}`.padEnd(5, 0)}</DataValue>
-              </DataItem>
+              <div className="mb-4">
+                <SupTitle>OG</SupTitle>
+                <div>{`${measuredOg}`.padEnd(5, 0)}</div>
+              </div>
             )}
             {measuredFg && (
-              <DataItem>
-                <DataTitle>FG</DataTitle>
-                <DataValue>{`${measuredFg}`.padEnd(5, 0)}</DataValue>
-              </DataItem>
+              <div className="mb-4">
+                <SupTitle>FG</SupTitle>
+                <div>{`${measuredFg}`.padEnd(5, 0)}</div>
+              </div>
             )}
-          </DataGrid>
-        </CardSection>
-      </CardContainer>
-    </Card>
+          </div>
+        </div>
+      </div>
+    </article>
   );
 };
 
-const Card = styled.li`
-  background: #ffffff;
-  border: 1px solid var(--color-gray-200);
-  border-radius: var(--border-radius-base);
-  padding: var(--space-24);
-  margin-bottom: var(--space-64);
-`;
 
-const CardContainer = styled.div`
-  display: grid;
-  grid-gap: var(--space-8);
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto;
-  grid-template-areas: "visual visual visual desc desc desc desc desc desc data data data";
-`;
+const ColorCircle = (props) => (
+  <div className="w-40 h-40 bg-gray-300 rounded-full shadow mt-6 text-center" {...props} />
+)
 
-const CardSection = styled.section`
-  padding: var(--space-16);
-`;
-
-const PictureContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  text-align: center;
-`;
-const ColorCircle = styled.div`
-  text-align: center;
-  width: var(--space-160);
-  height: var(--space-160);
-  background: var(--color-gray-300);
-  border-radius: 500px;
-  box-shadow: var(--box-shadow-base);
-  margin-top: var(--space-24);
-`;
-
-const SupTitle = styled.span`
-  text-transform: uppercase;
-  color: var(--color-gray-500);
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-`;
-
-const BeerName = styled.h2`
-  font-size: var(--font-size-xl);
-`;
-
-const Ingredients = styled.div`
-  display: flex;
-`;
-
-const IngredientType = styled.div`
-  flex: 1 1 auto;
-`;
-const IngredientTitle = styled.div`
-  text-transform: uppercase;
-  color: var(--color-gray-400);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-`;
-const IngredientValue = styled.div`
-  font-size: var(--font-size-sm);
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-
-    li {
-      font-size: var(--font-size-sm);
-    }
-  }
-`;
-
-const DataList = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-`;
-
-const DataItem = styled.li`
-  margin-bottom: var(--space-12);
-`;
-
-const DataGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto;
-`;
-const DataGridItem = styled.div``;
-
-const DataTitle = styled.div`
-  text-transform: uppercase;
-  color: var(--color-gray-400);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-`;
-const DataValue = styled.div`
-  color: var(--color-primary);
-`;
-
-const Hr = styled.hr`
-  border-top: 1px solid var(--color-gray-200);
-  border-bottom: none;
-  margin: var(--space-24) 0;
-`;
+const SupTitle = ({children}) => (
+  <div className="uppercase text-gray-500 text-sm font-semibold">{children}</div>
+)

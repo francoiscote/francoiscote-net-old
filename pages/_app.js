@@ -1,10 +1,14 @@
 import Head from "next/head";
 import Script from "next/script";
 
-import { globalStyles } from "../components/globalStyles";
+
+import '../styles/globals.css'
+
+// import { globalStyles } from "../components/globalStyles";
 import { Layout } from "../components/Layout";
 
 function App({ Component, pageProps }) {
+
   return (
     <>
       {/* Google Analytics */}
@@ -26,7 +30,7 @@ function App({ Component, pageProps }) {
         {/* Favicon */}
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {globalStyles}
+      {/* {globalStyles} */}
       <Layout>
         <Component {...pageProps} />
       </Layout>

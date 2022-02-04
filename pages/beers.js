@@ -2,7 +2,6 @@ import Head from "next/head";
 import { beerItems } from "../components/Beers/BeerCard";
 
 import { NavBar } from "../components/NavBar";
-import { Title1 } from "../components/Typography";
 import { BeerCard } from "../components/Beers/BeerCard";
 
 const BREWFATHER_API_DOMAIN = "https://api.brewfather.app/v1";
@@ -79,12 +78,12 @@ export default function BeersPage({ beers }) {
 
       <NavBar />
 
-      <Title1> Beers</Title1>
-      <ul role="list">
+      <main>
+        <h1> Beers</h1>
         {beers.map((b, i) => (
           <BeerCard key={`beer-${i}`} {...b} />
         ))}
-      </ul>
+      </main>
     </>
   );
 }

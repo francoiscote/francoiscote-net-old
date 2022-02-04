@@ -1,8 +1,7 @@
 import Head from "next/head";
-import styled from "@emotion/styled";
 
 import { NavBar } from "../components/NavBar";
-import { Title1, BigP, Strong } from "../components/Typography";
+import { GithubIcon } from "../components/icons/SocialMediaIcons";
 
 export default function Home() {
   return (
@@ -13,19 +12,24 @@ export default function Home() {
 
       <NavBar />
 
-      <div css={{ textAlign: "center", marginTop: "var(--space-80)" }}>
-        <Title1>Bonjour,</Title1>
-        <div css={{ marginBottom: "var(--space-12)" }}>
-          <BigP>
-            My name is <Strong>François Côté</Strong>,
+      <div className="text-center mt-20">
+        <h1>Bonjour,</h1>
+        <div className="mb-12">
+          <p className="lead">
+            My name is <strong>François Côté</strong>,
             <br />
-            and I am a <Strong>Web Developer</Strong> based in{" "}
-            <Strong>Montréal (QC), Canada</Strong>.
-          </BigP>
+            and I am a <strong>Web Developer</strong> based in{" "}
+            <strong>Montréal (QC), Canada</strong>.
+          </p>
         </div>
-        <p css={{ marginTop: "var(--space-32)" }}>
-          <a href="https://www.github.com/francoiscote">github</a>
-        </p>
+        <div className="flex justify-center">
+          <a
+            href="https://www.github.com/francoiscote"
+            className="text-gray-300 hover:text-gray-400"
+          >
+            <GithubIcon className="h-7 w-7 transition-colors" />
+          </a>
+        </div>
       </div>
     </>
   );

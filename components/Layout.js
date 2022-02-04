@@ -1,12 +1,4 @@
-import styled from "@emotion/styled";
-
 export function Layout({ children }) {
-  return <StyledLayout>{children}</StyledLayout>;
+  return <main className="max-w-screen-xl my-0 mx-auto px-4">{children}</main>;
 }
 
-const StyledLayout = styled.main`
-  max-width: 1400px;
-  margin: 0 auto;
-  padding-left: var(--space-16);
-  padding-right: var(--space-16);
-`;
