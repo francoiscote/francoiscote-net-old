@@ -25,7 +25,7 @@ export default function Home() {
         <div className="flex justify-center">
           <a
             href="https://www.github.com/francoiscote"
-            className="text-gray-300 hover:text-gray-400"
+            className="text-slate-400 hover:text-slate-500"
           >
             <GithubIcon className="h-7 w-7 transition-colors" />
           </a>

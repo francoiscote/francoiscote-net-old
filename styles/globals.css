@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-slate-50;
+    @apply bg-slate-50 text-slate-800;
   }
 
   h1 {
@@ -44,7 +44,7 @@
   }
 
   a {
-    @apply text-red-500 underline;
+    @apply text-red-500 underline cursor-pointer;
   }
   a:hover {
     @apply no-underline;
