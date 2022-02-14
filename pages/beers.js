@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Cache } from "memory-cache";
 
 import { groupBy } from "../lib/collections";
 import { capitalize } from "../lib/strings";
@@ -7,13 +8,15 @@ import { NavBar } from "../components/NavBar";
 import { BeerCard } from "../components/Beers/BeerCard";
 
 const BREWFATHER_API_DOMAIN = "https://api.brewfather.app/v1";
+const CACHE_TTL = 5 * 60 * 1000; // 5mins
 
-// TODO: cache for rate-limit of 150 calls per hour on the API
+const memoryCache = new Cache();
+
 export async function getServerSideProps({ req, res }) {
   // https://nextjs.org/docs/going-to-production#caching
   res.setHeader(
     "Cache-Control",
-    "public, s-maxage=60, stale-while-revalidate=120"
+    "public, s-maxage=60, stale-while-revalidate=240"
   );
 
   const authString = Buffer.from(
@@ -49,10 +52,19 @@ export async function getServerSideProps({ req, res }) {
     4: "#f5b290",
   };
 
-  const response = await fetch(
-    `${BREWFATHER_API_DOMAIN}/batches?include=${includes.join(",")}`,
-    { headers }
-  );
+  const endpoint = `/batches?include=${includes.join(",")}`;
+
+  const cachedData = memoryCache.get(endpoint);
+
+  if (cachedData) {
+    return {
+      props: cachedData,
+    };
+  }
+
+  const response = await fetch(`${BREWFATHER_API_DOMAIN}${endpoint}`, {
+    headers,
+  });
   const rawData = await response.json();
 
   if (!rawData) {
@@ -76,16 +88,20 @@ export async function getServerSideProps({ req, res }) {
     completed = [],
   } = groupBy(data, (b) => b.status.toLowerCase());
 
-  return {
-    props: {
-      beerStatuses: {
-        planning,
-        brewing,
-        fermenting,
-        conditioning,
-        completed,
-      },
+  const finalData = {
+    beerStatuses: {
+      planning,
+      brewing,
+      fermenting,
+      conditioning,
+      completed,
     },
+  };
+
+  memoryCache.put(endpoint, finalData, CACHE_TTL);
+
+  return {
+    props: finalData,
   };
 }
 
