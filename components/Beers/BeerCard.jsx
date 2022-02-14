@@ -24,20 +24,17 @@ export const BeerCard = ({
     >
       <div className="md:grid grid-cols-12 gap-4 auto-rows-auto">
         <div className="md:hidden">
-          <SupTitle>
-            Batch #{batchNo} - {recipe.style.name}
-          </SupTitle>
+          <SupTitle>{recipe.style.name}</SupTitle>
           <h2 className="">{recipe.name}</h2>
         </div>
         <div className="p-4 col-span-4">
-          <SupTitle className="hidden md:block">Batch #{batchNo}</SupTitle>
           <div className="flex justify-center text-center">
-            <ColorCircle style={{ backgroundColor: color }} />
+            <BatchCircle batchNo={batchNo} color={color} />
           </div>
-          <div className="grid grid-cols-2 mt-12 px-12">
+          <div className="grid grid-cols-2 mt-10 px-12 text-xl">
             {measuredAbv && (
               <div className="mb-4 text-center">
-                <h3 className="text-base tracking-normal uppercase font-semibold mb-0">
+                <h3 className="text-xl tracking-normal uppercase font-semibold mb-0">
                   ABV
                 </h3>
                 <div>{measuredAbv}%</div>
@@ -45,7 +42,7 @@ export const BeerCard = ({
             )}
             {estimatedIbu && (
               <div className="mb-4 text-center">
-                <h3 className="text-base tracking-normal uppercase font-semibold mb-0">
+                <h3 className="text-xl tracking-normal uppercase font-semibold mb-0">
                   IBU
                 </h3>
                 <div>{estimatedIbu}</div>
@@ -53,7 +50,7 @@ export const BeerCard = ({
             )}
             {measuredOg && (
               <div className="mb-4 text-center">
-                <h3 className="text-base tracking-normal uppercase font-semibold mb-0">
+                <h3 className="text-xl tracking-normal uppercase font-semibold mb-0">
                   OG
                 </h3>
                 <div>{`${measuredOg}`.padEnd(5, 0)}</div>
@@ -61,7 +58,7 @@ export const BeerCard = ({
             )}
             {measuredFg && (
               <div className="mb-4 text-center">
-                <h3 className="text-base tracking-normal uppercase font-semibold mb-0">
+                <h3 className="text-xl tracking-normal uppercase font-semibold mb-0">
                   FG
                 </h3>
                 <div>{`${measuredFg}`.padEnd(5, 0)}</div>
@@ -76,15 +73,15 @@ export const BeerCard = ({
           </div>
 
           <div className="py-4 px-8 bg-white mb-8 border rounded-md">
-            <ul className="flex justify-between">
+            <ul className="md:flex text-center md:text-left justify-between">
               {status && (
-                <div>
+                <div className="mb-6 md:mb-0">
                   <SupTitle>Status</SupTitle>
                   <div>{status}</div>
                 </div>
               )}
               {formatedBrewDate && (
-                <div>
+                <div className="mb-6 md:mb-0">
                   <SupTitle>Brew Date</SupTitle>
                   <div>{formatedBrewDate}</div>
                 </div>
@@ -153,12 +150,22 @@ export const BeerCard = ({
   );
 };
 
-const ColorCircle = ({ className, ...restProps }) => (
-  <div
-    className={`w-52 md:w-40 lg:w-52 h-52 md:h-40 lg:h-52 bg-gray-300 rounded-full shadow mt-6 text-center ${className}`}
-    {...restProps}
-  />
-);
+const BatchCircle = ({ color, batchNo, className, ...restProps }) => {
+  return (
+    <div
+      className={`relative flex justify-center items-center w-52 md:w-40 lg:w-52 h-52 md:h-40 lg:h-52 bg-gray-300 rounded-full shadow text-center text-9xl font-bold ${className}`}
+      style={{ backgroundColor: color }}
+      {...restProps}
+    >
+      <div className="mix-blend-overlay text-white opacity-40">
+        <div className="absolute inset-y-1/3 left-1/4 text-3xl font-semibold align-sub -mt-8">
+          #
+        </div>
+        {batchNo}
+      </div>
+    </div>
+  );
+};
 
 const SupTitle = ({ children, className, ...restProps }) => (
   <div
