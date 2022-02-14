@@ -110,17 +110,18 @@ export default function BeersPage({ beerStatuses }) {
         </p>
         {statuses.map((s, i) => {
           const beers = beerStatuses[s];
+
+          if (!beers.length) {
+            return false;
+          }
+
           return (
-            <>
-              {beers.length > 0 && (
-                <section key={`status-${s}`} className="mt-20">
-                  <h3 className="mb-10">{capitalize(s)}</h3>
-                  {beers.map((b, i) => (
-                    <BeerCard key={`beer-${i}`} {...b} />
-                  ))}
-                </section>
-              )}
-            </>
+            <section key={`status-${s}`} className="mt-20">
+              <h3 className="mb-10">{capitalize(s)}</h3>
+              {beers.map((b, i) => (
+                <BeerCard key={`beer-${i}`} {...b} />
+              ))}
+            </section>
           );
         })}
       </main>
