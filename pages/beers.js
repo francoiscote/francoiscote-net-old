@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Cache } from "memory-cache";
+import NodeCache from "node-cache";
 
 import { groupBy } from "../lib/collections";
 import { capitalize } from "../lib/strings";
@@ -8,9 +8,9 @@ import { NavBar } from "../components/NavBar";
 import { BeerCard } from "../components/Beers/BeerCard";
 
 const BREWFATHER_API_DOMAIN = "https://api.brewfather.app/v1";
-const CACHE_TTL = 5 * 60 * 1000; // 5mins
+const CACHE_TTL = 5 * 60; // 5mins
 
-const memoryCache = new Cache();
+const memoryCache = new NodeCache({ stdTTL: CACHE_TTL });
 
 export async function getServerSideProps({ req, res }) {
   // https://nextjs.org/docs/going-to-production#caching
@@ -98,7 +98,7 @@ export async function getServerSideProps({ req, res }) {
     },
   };
 
-  memoryCache.put(endpoint, finalData, CACHE_TTL);
+  memoryCache.set(endpoint, finalData);
 
   return {
     props: finalData,
