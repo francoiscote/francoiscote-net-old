@@ -33,35 +33,29 @@ export const BeerCard = ({
           </div>
           <div className="grid grid-cols-2 mt-10 px-12 text-xl">
             {measuredAbv && (
-              <div className="mb-4 text-center">
-                <h3 className="text-xl tracking-normal uppercase font-semibold mb-0">
-                  ABV
-                </h3>
-                <div>{measuredAbv}%</div>
+              <div className="mb-6 text-xl text-center">
+                {measuredAbv}&nbsp;&nbsp;
+                <span className="font-semibold">%</span>
               </div>
             )}
             {estimatedIbu && (
-              <div className="mb-4 text-center">
-                <h3 className="text-xl tracking-normal uppercase font-semibold mb-0">
-                  IBU
-                </h3>
-                <div>{estimatedIbu}</div>
+              <div className="mb-6 text-xl text-center">
+                <div>
+                  {estimatedIbu}&nbsp;&nbsp;
+                  <span className="font-semibold">IBU</span>
+                </div>
               </div>
             )}
             {measuredOg && (
-              <div className="mb-4 text-center">
-                <h3 className="text-xl tracking-normal uppercase font-semibold mb-0">
-                  OG
-                </h3>
-                <div>{`${measuredOg}`.padEnd(5, 0)}</div>
+              <div className="text-center">
+                {`${measuredOg}`.padEnd(5, 0)}&nbsp;&nbsp;
+                <span className="font-semibold">OG</span>
               </div>
             )}
             {measuredFg && (
-              <div className="mb-4 text-center">
-                <h3 className="text-xl tracking-normal uppercase font-semibold mb-0">
-                  FG
-                </h3>
-                <div>{`${measuredFg}`.padEnd(5, 0)}</div>
+              <div className="text-center">
+                {`${measuredFg}`.padEnd(5, 0)}&nbsp;&nbsp;
+                <span className="font-semibold">FG</span>
               </div>
             )}
           </div>
