@@ -50,6 +50,7 @@ export async function getServerSideProps({ req, res }) {
     2: "#e0b44c",
     3: "#8aab60",
     4: "#f5b290",
+    5: "#cfab6c",
   };
 
   const endpoint = `/batches?include=${includes.join(",")}`;
