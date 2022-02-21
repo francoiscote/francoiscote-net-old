@@ -1,3 +1,5 @@
+import { formatKiloGrams } from "../../lib/strings";
+
 export const BeerCard = ({
   brewDate,
   batchNo,
@@ -9,6 +11,7 @@ export const BeerCard = ({
   color,
   estimatedIbu,
   measuredAbv,
+  measuredBatchSize,
   measuredFg,
   measuredOg,
   recipe,
@@ -74,6 +77,14 @@ export const BeerCard = ({
                   <div>{status}</div>
                 </div>
               )}
+
+              {measuredBatchSize && (
+                <div className="mb-6 md:mb-0">
+                  <SupTitle>Batch Size</SupTitle>
+                  <div>{measuredBatchSize}L</div>
+                </div>
+              )}
+
               {formatedBrewDate && (
                 <div className="mb-6 md:mb-0">
                   <SupTitle>Brew Date</SupTitle>
@@ -100,7 +111,9 @@ export const BeerCard = ({
                 </h3>
                 <ul className="text-sm">
                   {batchFermentables.map((y) => (
-                    <li key={y.name}>{y.name}</li>
+                    <li key={y.name}>
+                      {y.name} - {formatKiloGrams(y.amount)}
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -110,7 +123,9 @@ export const BeerCard = ({
                 </h3>
                 <ul className="text-sm">
                   {batchHops.map((y) => (
-                    <li key={y.name}>{y.name}</li>
+                    <li key={y.name}>
+                      {y.name} - {y.amount}g
+                    </li>
                   ))}
                 </ul>
               </div>

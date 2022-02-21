@@ -55,29 +55,56 @@ export async function getServerSideProps({ req, res }) {
 
   const endpoint = `/batches?include=${includes.join(",")}`;
 
-  const cachedData = memoryCache.get(endpoint);
+  const cachedBFData = memoryCache.get(endpoint);
 
-  if (cachedData) {
-    return {
-      props: cachedData,
-    };
+  /**
+   * -----------------------
+   * Fetch Data
+   * -----------------------
+   */
+
+  let rawData;
+  // Maybe HIT Brewfather's API
+  if (cachedBFData) {
+    rawData = cachedBFData;
+  } else {
+    const response = await fetch(`${BREWFATHER_API_DOMAIN}${endpoint}`, {
+      headers,
+    });
+    rawData = await response.json();
+    memoryCache.set(endpoint, rawData);
   }
 
-  const response = await fetch(`${BREWFATHER_API_DOMAIN}${endpoint}`, {
-    headers,
-  });
-  const rawData = await response.json();
-
+  // console.log(rawData);
   if (!rawData) {
     return {
       notFound: true,
     };
   }
 
-  // Add colors data to beers
+  /**
+   * -----------------------
+   * Modify Data
+   * -----------------------
+   */
+
   const data = rawData.map((b) => {
+    let batch = {};
+
+    // Add colors data to beers
     const color = batchesColors[b.batchNo] || null;
-    return { ...b, color };
+    batch = { ...b, color };
+
+    // Order Fermentables by Amount Descending
+    batch.batchFermentables.sort((a, b) => {
+      return b.amount - a.amount;
+    });
+    // Order Fermentables by Amount Descending
+    batch.batchHops.sort((a, b) => {
+      return b.amount - a.amount;
+    });
+
+    return batch;
   });
 
   // Group by Status
@@ -98,8 +125,6 @@ export async function getServerSideProps({ req, res }) {
       completed,
     },
   };
-
-  memoryCache.set(endpoint, finalData);
 
   return {
     props: finalData,
