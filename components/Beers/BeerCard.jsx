@@ -17,6 +17,8 @@ export const BeerCard = ({
   name,
   recipe,
   status,
+  tasteRating,
+  tasteNotes,
 }) => {
   const formatedBrewDate = new Date(brewDate).toDateString();
   const formatedBottlingDate = new Date(bottlingDate).toDateString();
@@ -63,13 +65,17 @@ export const BeerCard = ({
               </div>
             )}
           </div>
+          {tasteRating && (
+            <div className="text-center mt-6">
+              <StarRating rating={tasteRating} />
+            </div>
+          )}
         </div>
         <div className="p-4 col-span-8">
           <div className="hidden md:block">
             <SupTitle>{recipe.name}</SupTitle>
             <h2 className="">{name}</h2>
           </div>
-
           <div className="py-4 px-8 bg-white mb-8 border rounded-md">
             <ul className="md:flex text-center md:text-left justify-between">
               {status && (
@@ -100,7 +106,6 @@ export const BeerCard = ({
               )}
             </ul>
           </div>
-
           <div>
             <h2 className="text-2xl tracking-normal uppercase font-semibold mb-3">
               Ingredients
@@ -145,7 +150,14 @@ export const BeerCard = ({
               </div>
             </div>
           </div>
-
+          {/* {tasteNotes && (
+            <div className="mt-9">
+              <h2 className="text-2xl tracking-normal uppercase font-semibold mb-3">
+                Notes
+              </h2>
+              <p>{tasteNotes}</p>
+            </div>
+          )} */}
           {/* {batchNotes && (
             <>
               <h3 className="text-base tracking-normal uppercase font-semibold">
@@ -157,6 +169,27 @@ export const BeerCard = ({
         </div>
       </div>
     </article>
+  );
+};
+
+const StarRating = ({ rating }) => {
+  return (
+    <div className="text-xl text-slate-300">
+      {[...Array(5)].map((star, index) => {
+        index += 1;
+        const starClass =
+          index * 20 < rating
+            ? "text-yellow-500"
+            : index * 20 <= rating + 10
+            ? "half-star"
+            : "";
+        return (
+          <span key={index} className={starClass}>
+            &#9733;
+          </span>
+        );
+      })}
+    </div>
   );
 };
 

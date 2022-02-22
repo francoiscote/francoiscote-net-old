@@ -50,3 +50,16 @@
     @apply underline text-blue-500;
   }
 }
+
+@layer components {
+  .half-star {
+    background: linear-gradient(
+      90deg,
+      theme("colors.yellow.500"),
+      theme("colors.yellow.500") 50%,
+      theme("colors.slate.300") 50%,
+      theme("colors.slate.300")
+    );
+    @apply bg-clip-text text-transparent;
+  }
+}
