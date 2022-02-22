@@ -173,14 +173,17 @@ export const BeerCard = ({
 };
 
 const StarRating = ({ rating }) => {
+  const baseFiveRating = Math.round(rating / 10) / 2;
+  const baseTenRating = rating / 20;
+  const formatedRating = Number(baseTenRating).toFixed(1);
   return (
     <div className="text-xl text-slate-300">
       {[...Array(5)].map((star, index) => {
         index += 1;
         const starClass =
-          index * 20 < rating
+          index <= baseFiveRating
             ? "text-yellow-500"
-            : index * 20 <= rating + 10
+            : index <= baseFiveRating + 0.5
             ? "half-star"
             : "";
         return (
@@ -189,6 +192,7 @@ const StarRating = ({ rating }) => {
           </span>
         );
       })}
+      <div className="text-sm mx-1">({formatedRating})</div>
     </div>
   );
 };
