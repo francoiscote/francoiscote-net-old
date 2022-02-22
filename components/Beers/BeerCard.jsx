@@ -1,11 +1,11 @@
 import { formatKiloGrams } from "../../lib/strings";
 
 export const BeerCard = ({
+  absoluteId,
   brewDate,
   batchNo,
   batchFermentables,
   batchHops,
-  batchNotes,
   batchYeasts,
   bottlingDate,
   color,
@@ -14,6 +14,7 @@ export const BeerCard = ({
   measuredBatchSize,
   measuredFg,
   measuredOg,
+  name,
   recipe,
   status,
 }) => {
@@ -27,12 +28,12 @@ export const BeerCard = ({
     >
       <div className="md:grid grid-cols-12 gap-4 auto-rows-auto">
         <div className="md:hidden">
-          <SupTitle>{recipe.style.name}</SupTitle>
-          <h2 className="">{recipe.name}</h2>
+          <SupTitle>{recipe.name}</SupTitle>
+          <h2 className="">{name}</h2>
         </div>
         <div className="p-4 col-span-4">
           <div className="flex justify-center text-center">
-            <BatchCircle batchNo={batchNo} color={color} />
+            <BatchCircle number={batchNo} color={color} />
           </div>
           <div className="grid grid-cols-2 mt-10 px-12 text-xl">
             {measuredAbv && (
@@ -65,8 +66,8 @@ export const BeerCard = ({
         </div>
         <div className="p-4 col-span-8">
           <div className="hidden md:block">
-            <SupTitle>{recipe.style.name}</SupTitle>
-            <h2 className="">{recipe.name}</h2>
+            <SupTitle>{recipe.name}</SupTitle>
+            <h2 className="">{name}</h2>
           </div>
 
           <div className="py-4 px-8 bg-white mb-8 border rounded-md">
@@ -112,7 +113,7 @@ export const BeerCard = ({
                 <ul className="text-sm">
                   {batchFermentables.map((y) => (
                     <li key={y.name}>
-                      {y.name} - {formatKiloGrams(y.amount)}
+                      {y.name} — {formatKiloGrams(y.amount)}
                     </li>
                   ))}
                 </ul>
@@ -124,7 +125,7 @@ export const BeerCard = ({
                 <ul className="text-sm">
                   {batchHops.map((y) => (
                     <li key={y.name}>
-                      {y.name} - {y.amount}g
+                      {y.name} — {y.amount}g
                     </li>
                   ))}
                 </ul>
@@ -136,7 +137,7 @@ export const BeerCard = ({
                 <ul className="text-sm">
                   {batchYeasts.map((y) => (
                     <li key={y.name}>
-                      {y.laboratory} - {y.name}
+                      {y.laboratory} — {y.name}
                       {y.productId ? ` (${y.productId})` : ``}
                     </li>
                   ))}
@@ -159,10 +160,10 @@ export const BeerCard = ({
   );
 };
 
-const BatchCircle = ({ color, batchNo, className, ...restProps }) => {
+const BatchCircle = ({ color, number, className, ...restProps }) => {
   return (
     <div
-      className={`relative flex justify-center items-center w-52 md:w-40 lg:w-52 h-52 md:h-40 lg:h-52 bg-gray-300 rounded-full shadow text-center text-9xl font-bold ${className}`}
+      className={`relative flex justify-center items-center w-52 md:w-40 lg:w-52 h-52 md:h-40 lg:h-52 bg-gray-300 rounded-full drop-shadow text-center text-9xl font-bold ${className}`}
       style={{ backgroundColor: color }}
       {...restProps}
     >
@@ -170,7 +171,7 @@ const BatchCircle = ({ color, batchNo, className, ...restProps }) => {
         <div className="absolute inset-y-1/3 left-1/4 text-3xl font-semibold align-sub -mt-8">
           #
         </div>
-        {batchNo}
+        {number}
       </div>
     </div>
   );
@@ -178,7 +179,7 @@ const BatchCircle = ({ color, batchNo, className, ...restProps }) => {
 
 const SupTitle = ({ children, className, ...restProps }) => (
   <div
-    className={`uppercase text-gray-500 text-sm font-semibold ${className}`}
+    className={`uppercase text-gray-500 text-sm font-semibold mb-2 ${className}`}
     {...restProps}
   >
     {children}

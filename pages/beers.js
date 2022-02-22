@@ -12,7 +12,7 @@ const CACHE_TTL = 5 * 60; // 5mins
 
 const memoryCache = new NodeCache({ stdTTL: CACHE_TTL });
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ req, res, query }) {
   // https://nextjs.org/docs/going-to-production#caching
   res.setHeader(
     "Cache-Control",
@@ -46,14 +46,14 @@ export async function getServerSideProps({ req, res }) {
   ];
 
   const batchesColors = {
-    1: "#805339",
-    2: "#e0b44c",
-    3: "#8aab60",
-    4: "#f5b290",
-    5: "#cfab6c",
+    KF4QB9uONI0xlmGZlFDMkSdynNAstr: "#a16452",
+    WBkgeGLkfkwNOSV9pnD3zS6UkaTWou: "#ebc94f",
+    i2E4ooAkLp8tkjKc1MCfygHvpRBB0N: "#f5b290",
+    kCtZyLhBhBbSoNiIl8GkFiYXoCVQ8s: "#8aab60",
+    "2znilKPnYjmF6rLhAARCBuAkOdaOXM": "#a16452",
   };
 
-  const endpoint = `/batches?include=${includes.join(",")}`;
+  const endpoint = `/batches?complete=true`;
 
   const cachedBFData = memoryCache.get(endpoint);
 
@@ -65,7 +65,7 @@ export async function getServerSideProps({ req, res }) {
 
   let rawData;
   // Maybe HIT Brewfather's API
-  if (cachedBFData) {
+  if (cachedBFData && !query.debug) {
     rawData = cachedBFData;
   } else {
     const response = await fetch(`${BREWFATHER_API_DOMAIN}${endpoint}`, {
@@ -76,6 +76,7 @@ export async function getServerSideProps({ req, res }) {
   }
 
   // console.log(rawData);
+
   if (!rawData) {
     return {
       notFound: true,
@@ -88,12 +89,14 @@ export async function getServerSideProps({ req, res }) {
    * -----------------------
    */
 
-  const data = rawData.map((b) => {
+  const data = rawData.map((b, i) => {
     let batch = {};
 
-    // Add colors data to beers
-    const color = batchesColors[b.batchNo] || null;
-    batch = { ...b, color };
+    // Add Color data data to the beer
+    batch = {
+      ...b,
+      color: batchesColors[b._id] || null,
+    };
 
     // Order Fermentables by Amount Descending
     batch.batchFermentables.sort((a, b) => {
