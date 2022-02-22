@@ -48,11 +48,14 @@ export async function getServerSideProps({ req, res, query }) {
     "tasteNotes",
   ];
 
+  // prettier ignore because I want to force the quotes
+  // on properties names, because they are IDs
+  // prettier-ignore
   const batchesColors = {
-    KF4QB9uONI0xlmGZlFDMkSdynNAstr: "#a16452",
-    WBkgeGLkfkwNOSV9pnD3zS6UkaTWou: "#ebc94f",
-    i2E4ooAkLp8tkjKc1MCfygHvpRBB0N: "#f5b290",
-    kCtZyLhBhBbSoNiIl8GkFiYXoCVQ8s: "#8aab60",
+    "KF4QB9uONI0xlmGZlFDMkSdynNAstr": "#a16452",
+    "WBkgeGLkfkwNOSV9pnD3zS6UkaTWou": "#ebc94f",
+    "i2E4ooAkLp8tkjKc1MCfygHvpRBB0N": "#f5b290",
+    "kCtZyLhBhBbSoNiIl8GkFiYXoCVQ8s": "#8aab60",
     "2znilKPnYjmF6rLhAARCBuAkOdaOXM": "#a16452",
   };
 
