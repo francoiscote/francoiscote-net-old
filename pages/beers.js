@@ -150,7 +150,7 @@ export default function BeersPage({ beerStatuses }) {
         <p className="lead">
           Sometimes, I brew beer.
           <br />
-          Here is a live view of what I have in store based on the{" "}
+          Here is a live view of what is brewing based on the{" "}
           <a href="https://brewfather.app/?via=694b06">Brewfather</a>
           <span className="text-slate-400">*</span> API.
         </p>
