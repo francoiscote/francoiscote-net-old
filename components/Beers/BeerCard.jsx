@@ -26,41 +26,41 @@ export const BeerCard = ({
   return (
     <article
       key={`batch-${batchNo}`}
-      className="bg-gradient-to-br from-slate-100 to-slate-50 border border-gray-200 rounded-lg shadow-md p-6 mb-16"
+      className="bg-gradient-to-br from-slate-100 to-slate-50 border border-gray-200 rounded-lg shadow-md p-4 md:p-6 mb-16"
     >
       <div className="md:grid grid-cols-12 gap-4 auto-rows-auto">
         <div className="md:hidden">
           <SupTitle>{recipe.name}</SupTitle>
-          <h2 className="">{name}</h2>
+          <h2 className="text-4xl">{name}</h2>
         </div>
         <div className="p-4 col-span-4">
           <div className="flex justify-center text-center">
             <BatchCircle number={batchNo} color={color} />
           </div>
-          <div className="grid grid-cols-2 mt-10 px-12 text-xl">
+          <div className="grid grid-cols-2 my-10 md:px-12 text-xl">
             {measuredAbv && (
               <div className="mb-6 text-xl text-center">
-                {measuredAbv}&nbsp;&nbsp;
+                {measuredAbv}&nbsp;
                 <span className="font-semibold">%</span>
               </div>
             )}
             {estimatedIbu && (
               <div className="mb-6 text-xl text-center">
                 <div>
-                  {estimatedIbu}&nbsp;&nbsp;
+                  {estimatedIbu}&nbsp;
                   <span className="font-semibold">IBU</span>
                 </div>
               </div>
             )}
             {measuredOg && (
               <div className="text-center">
-                {`${measuredOg}`.padEnd(5, 0)}&nbsp;&nbsp;
+                {`${measuredOg}`.padEnd(5, 0)}&nbsp;
                 <span className="font-semibold">OG</span>
               </div>
             )}
             {measuredFg && (
               <div className="text-center">
-                {`${measuredFg}`.padEnd(5, 0)}&nbsp;&nbsp;
+                {`${measuredFg}`.padEnd(5, 0)}&nbsp;
                 <span className="font-semibold">FG</span>
               </div>
             )}
@@ -106,48 +106,52 @@ export const BeerCard = ({
               )}
             </ul>
           </div>
-          <div>
-            <h2 className="text-2xl tracking-normal uppercase font-semibold mb-3">
-              Ingredients
-            </h2>
-            <div className="grid grid-cols-3 gap-4 mb-6" role="list">
-              <div>
-                <h3 className="text-base tracking-normal uppercase font-semibold">
-                  Fermentables
-                </h3>
-                <ul className="text-sm">
-                  {batchFermentables.map((y) => (
-                    <li key={y.name}>
-                      {y.name} — {formatKiloGrams(y.amount)}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-base tracking-normal uppercase font-semibold">
-                  Hops
-                </h3>
-                <ul className="text-sm">
-                  {batchHops.map((y) => (
-                    <li key={y.name}>
-                      {y.name} — {y.amount}g
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-base tracking-normal uppercase font-semibold">
-                  Yeasts
-                </h3>
-                <ul className="text-sm">
-                  {batchYeasts.map((y) => (
-                    <li key={y.name}>
-                      {y.laboratory} — {y.name}
-                      {y.productId ? ` (${y.productId})` : ``}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+
+          <div className="md:grid grid-cols-3 gap-10 mb-6" role="list">
+            <div className="mb-6 md:mb-0">
+              <h3 className="text-lg tracking-normal uppercase font-semibold mb-2">
+                Fermentables
+              </h3>
+              <ul className="text-sm">
+                {batchFermentables.map((y) => (
+                  <IngredientItem
+                    item={y.name}
+                    quantity={formatKiloGrams(y.amount)}
+                    key={y.name}
+                  />
+                ))}
+              </ul>
+            </div>
+            <div className="mb-6 md:mb-0">
+              <h3 className="text-lg tracking-normal uppercase font-semibold mb-2">
+                Hops
+              </h3>
+              <ul className="text-sm">
+                {batchHops.map((y) => (
+                  <IngredientItem
+                    item={y.name}
+                    quantity={`${y.amount}g`}
+                    key={y.name}
+                  />
+                ))}
+              </ul>
+            </div>
+            <div className="mb-6 md:mb-0">
+              <h3 className="text-lg tracking-normal uppercase font-semibold mb-2">
+                Yeasts
+              </h3>
+              <ul className="text-sm">
+                {batchYeasts.map((y) => (
+                  // { y.laboratory } — {y.name} {y.productId ? ` (${y.productId})` : ``}
+
+                  <IngredientItem
+                    item={`${y.laboratory} - ${y.name} ${
+                      y.productId ? `(${y.productId})` : ``
+                    }`}
+                    key={y.name}
+                  />
+                ))}
+              </ul>
             </div>
           </div>
           {/* {tasteNotes && (
@@ -200,12 +204,12 @@ const StarRating = ({ rating }) => {
 const BatchCircle = ({ color, number, className, ...restProps }) => {
   return (
     <div
-      className={`relative flex justify-center items-center w-52 md:w-40 lg:w-52 h-52 md:h-40 lg:h-52 bg-gray-300 rounded-full drop-shadow text-center text-9xl font-bold ${className}`}
+      className={`relative flex justify-center items-center w-40 lg:w-52 h-40 lg:h-52 bg-gray-300 rounded-full drop-shadow text-center text-7xl md:text-9xl font-bold ${className}`}
       style={{ backgroundColor: color }}
       {...restProps}
     >
       <div className="mix-blend-overlay text-white opacity-40">
-        <div className="absolute inset-y-1/3 left-1/4 text-3xl font-semibold align-sub -mt-8">
+        <div className="absolute inset-y-1/3 left-1/4 text-2xl md:text-3xl font-semibold align-sub -mt-8">
           #
         </div>
         {number}
@@ -216,9 +220,23 @@ const BatchCircle = ({ color, number, className, ...restProps }) => {
 
 const SupTitle = ({ children, className, ...restProps }) => (
   <div
-    className={`uppercase text-gray-500 text-sm font-semibold mb-2 ${className}`}
+    className={`uppercase text-gray-400 md:text-sm font-semibold md:mb-2 ${className}`}
     {...restProps}
   >
     {children}
   </div>
+);
+
+const IngredientItem = ({ item, quantity, ...props }) => (
+  <li className="flex justify-between mb-2" {...props}>
+    <span className={quantity ? "flex-shrink-0" : ""}>{item}</span>
+    {quantity && (
+      <>
+        <span className="flex-shrink overflow-hidden text-slate-300  mx-4">
+          ..........................................................
+        </span>
+        <span className="flex-shrink-0 text-slate-400">{quantity}</span>
+      </>
+    )}
+  </li>
 );
