@@ -19,6 +19,8 @@ export async function getServerSideProps({ req, res, query }) {
     "public, s-maxage=60, stale-while-revalidate=240"
   );
 
+  const isDebug = query.hasOwnProperty("debug");
+
   const authString = Buffer.from(
     `${process.env.BREWFATHER_API_USER_ID}:${process.env.BREWFATHER_API_KEY}`
   ).toString("base64");
@@ -43,6 +45,7 @@ export async function getServerSideProps({ req, res, query }) {
     "recipe.style.name",
     "status",
     "tasteRating",
+    "tasteNotes",
   ];
 
   const batchesColors = {
@@ -53,7 +56,9 @@ export async function getServerSideProps({ req, res, query }) {
     "2znilKPnYjmF6rLhAARCBuAkOdaOXM": "#a16452",
   };
 
-  const endpoint = `/batches?include=${includes.join(",")}`;
+  const endpoint = isDebug
+    ? `/batches?complete=true`
+    : `/batches?include=${includes.join(",")}`;
 
   const cachedBFData = memoryCache.get(endpoint);
 
@@ -65,7 +70,7 @@ export async function getServerSideProps({ req, res, query }) {
 
   let rawData;
   // Maybe HIT Brewfather's API
-  if (cachedBFData && !query.debug) {
+  if (cachedBFData && !isDebug) {
     rawData = cachedBFData;
   } else {
     const response = await fetch(`${BREWFATHER_API_DOMAIN}${endpoint}`, {
@@ -75,7 +80,9 @@ export async function getServerSideProps({ req, res, query }) {
     memoryCache.set(endpoint, rawData);
   }
 
-  // console.log(rawData);
+  if (isDebug) {
+    console.log(rawData);
+  }
 
   if (!rawData) {
     return {
