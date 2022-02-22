@@ -151,7 +151,11 @@ export default function BeersPage({ beerStatuses }) {
           Sometimes, I brew beer.
           <br />
           Here is a live view of what I have in store based on the{" "}
-          <a href="https://brewfather.app/">Brewfather</a> API.
+          <a href="https://brewfather.app/?via=694b06">Brewfather</a>
+          <span className="text-slate-400">*</span> API.
+        </p>
+        <p className="text-right text-xs text-slate-400">
+          * This is an affiliate link, but I truly love this product
         </p>
         {statuses.map((s, i) => {
           const beers = beerStatuses[s];
