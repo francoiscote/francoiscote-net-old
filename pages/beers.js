@@ -53,7 +53,7 @@ export async function getServerSideProps({ req, res, query }) {
     "2znilKPnYjmF6rLhAARCBuAkOdaOXM": "#a16452",
   };
 
-  const endpoint = `/batches?complete=true`;
+  const endpoint = `/batches?include=${includes.join(",")}`;
 
   const cachedBFData = memoryCache.get(endpoint);
 
