@@ -9,6 +9,10 @@ export default function Home() {
     <>
       <Head>
         <title>francoiscote.net</title>
+        <meta
+          name="description"
+          content="Bonjour, My name is François Côté, and I am a Web Developer based in Montréal (QC), Canada."
+        />
       </Head>
 
       <NavBar />
