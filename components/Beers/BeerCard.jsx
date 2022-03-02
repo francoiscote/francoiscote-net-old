@@ -1,3 +1,4 @@
+import { daysSince } from "../../lib/dates";
 import { formatKiloGrams } from "../../lib/strings";
 
 export const BeerCard = ({
@@ -81,7 +82,14 @@ export const BeerCard = ({
               {status && (
                 <div className="mb-6 md:mb-0">
                   <SupTitle>Status</SupTitle>
-                  <div>{status}</div>
+                  <div>
+                    {status}
+                    <StatusRelativeDate
+                      status={status}
+                      brewDate={brewDate}
+                      bottlingDate={bottlingDate}
+                    />
+                  </div>
                 </div>
               )}
 
@@ -173,6 +181,28 @@ export const BeerCard = ({
         </div>
       </div>
     </article>
+  );
+};
+
+const StatusRelativeDate = ({ status, brewDate, bottlingDate }) => {
+  const nbDays =
+    status === "Fermenting"
+      ? daysSince(brewDate)
+      : ["Conditioning", "Completed"].includes(status)
+      ? daysSince(bottlingDate)
+      : null;
+
+  if (!nbDays) {
+    return null;
+  }
+
+  const unit = nbDays > 1 ? "days" : "day";
+
+  return (
+    <span className="text-slate-400">
+      {" "}
+      - {nbDays} {unit}
+    </span>
   );
 };
 
