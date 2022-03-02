@@ -20,6 +20,7 @@ export async function getServerSideProps({ req, res, query }) {
   );
 
   const isDebug = query.hasOwnProperty("debug");
+  const isClearCache = query.hasOwnProperty("clearCache");
 
   const authString = Buffer.from(
     `${process.env.BREWFATHER_API_USER_ID}:${process.env.BREWFATHER_API_KEY}`
@@ -63,6 +64,10 @@ export async function getServerSideProps({ req, res, query }) {
     ? `/batches?complete=true`
     : `/batches?include=${includes.join(",")}`;
 
+  if (isClearCache) {
+    memoryCache.flushAll();
+  }
+
   const cachedBFData = memoryCache.get(endpoint);
 
   /**
@@ -73,7 +78,7 @@ export async function getServerSideProps({ req, res, query }) {
 
   let rawData;
   // Maybe HIT Brewfather's API
-  if (cachedBFData && !isDebug) {
+  if (cachedBFData) {
     rawData = cachedBFData;
   } else {
     const response = await fetch(`${BREWFATHER_API_DOMAIN}${endpoint}`, {
