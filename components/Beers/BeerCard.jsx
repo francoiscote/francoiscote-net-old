@@ -206,6 +206,10 @@ const StatusRelativeDate = ({ status, brewDate, bottlingDate }) => {
   );
 };
 
+/**
+ * the rating we receive from BrewFather is a value between 0 and 100
+ * we want to convert this to a five star system with one decimal (ie: a score of 3.6/5.0)
+ */
 const StarRating = ({ rating }) => {
   const baseFiveRating = Math.round(rating / 10) / 2;
   const baseTenRating = rating / 20;
