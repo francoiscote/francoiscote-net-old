@@ -1,11 +1,12 @@
 import Head from "next/head";
+import Link from "next/link";
 import NodeCache from "node-cache";
 
-import { groupBy } from "../lib/collections";
-import { capitalize } from "../lib/strings";
+import { groupBy } from "@lib/collections";
+import { capitalize } from "@lib/strings";
 
-import { NavBar } from "../components/NavBar";
-import { BeerCard } from "../components/Beers/BeerCard";
+import { NavBar } from "@components/NavBar";
+import { BeerCard } from "@components/Beers/BeerCard";
 
 const BREWFATHER_API_DOMAIN = "https://api.brewfather.app/v1";
 const CACHE_TTL = 5 * 60; // 5mins
@@ -169,6 +170,15 @@ export default function BeersPage({ beerStatuses }) {
           <a href="https://brewfather.app/?via=694b06">Brewfather</a>
           <span className="text-slate-400">*</span> API.
         </p>
+
+        <p>
+          You can also have a look at the detailed{" "}
+          <Link href="/beers/fermentation-stats">
+            <a>fermentation stats</a>
+          </Link>{" "}
+          I use to calibrate my equipment profile.
+        </p>
+
         <p className="text-right text-xs text-slate-400">
           * This is an affiliate link, but I truly love this product
         </p>

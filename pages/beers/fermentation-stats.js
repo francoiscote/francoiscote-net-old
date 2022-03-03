@@ -1,11 +1,8 @@
 import Head from "next/head";
 import NodeCache from "node-cache";
 
-import { groupBy } from "../lib/collections";
-import { capitalize } from "../lib/strings";
-
-import { NavBar } from "../components/NavBar";
-import { BeerCard } from "../components/Beers/BeerCard";
+import { NavBar } from "@components/NavBar";
+import { get } from "@lib/collections";
 
 const BREWFATHER_API_DOMAIN = "https://api.brewfather.app/v1";
 const CACHE_TTL = 5 * 60; // 5mins
@@ -91,12 +88,23 @@ export async function getServerSideProps({ req, res, query }) {
     };
   }
 
+  // Massage Data
+  const returnedData = rawData
+    // Filter Out planned batches
+    .filter((b) => b.status !== "Planning")
+    // bubble up some recipe properties to the root of the batch object
+    .map(({ recipe, ...batch }) => ({
+      styleName: recipe.style.name,
+      boilTime: recipe.boilTime,
+      ...batch,
+    }));
+
   // Sort by brew date ASC
-  rawData.sort((a, b) => a.brewDate - b.brewDate);
+  returnedData.sort((a, b) => a.brewDate - b.brewDate);
 
   return {
     props: {
-      batches: rawData,
+      batches: returnedData,
     },
   };
 }
@@ -104,13 +112,40 @@ export async function getServerSideProps({ req, res, query }) {
 export default function BeersPage({ batches }) {
   console.log(batches);
 
-  const stats = {
-    // bottlingDate: "Bottling Date",
-    measuredBatchSize: "Batch Size (L)",
-    measuredBoilSize: "Pre-Boil Vol. (L)",
-    measuredKettleSize: "Post-Boil Vol. (L)",
-    "recipe.boilTime": "Boil Time",
-  };
+  const stats = [
+    {
+      key: "measuredBatchSize",
+      label: "Batch Size",
+      unit: "L",
+    },
+    {
+      key: "measuredBoilSize",
+      label: "Pre-Boil Vol.",
+      unit: "L",
+    },
+    {
+      key: "measuredKettleSize",
+      label: "Post-Boil Vol.",
+      unit: "L",
+    },
+    {
+      key: "boilTime",
+      label: "Boil Time",
+      unit: "h",
+      transform: (b) => b / 60,
+    },
+    {
+      key: "boilEvaporation",
+      label: "Evaporation Rate",
+      unit: "L/h",
+      highlight: true,
+      calculatedValue: (b) =>
+        (
+          (b.measuredBoilSize - b.measuredKettleSize) /
+          (b.boilTime / 60)
+        ).toPrecision(3),
+    },
+  ];
 
   return (
     <>
@@ -144,18 +179,21 @@ export default function BeersPage({ batches }) {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(stats).map((k) => (
-              <tr key={`stat-${k}`}>
-                <td className="font-semibold text-right border p-2 bg-slate-100">
-                  {stats[k]}
+            {stats.map((s) => (
+              <tr key={`stat-${s.key}`}>
+                <td
+                  className={`font-semibold text-right border p-2 bg-slate-100 ${
+                    s.highlight ? "font-bold" : ""
+                  }`}
+                >
+                  {s.label}
                 </td>
                 {batches.map((b) => (
-                  <td
-                    key={`batch-${b._id}-stat-${k}`}
-                    className="text-right font-mono text-base border p-2 bg-white"
-                  >
-                    {b[k]}
-                  </td>
+                  <TdBatchStat
+                    key={`batch-${b._id}-stat-${s.key}`}
+                    stat={s}
+                    batch={b}
+                  />
                 ))}
               </tr>
             ))}
@@ -166,3 +204,26 @@ export default function BeersPage({ batches }) {
     </>
   );
 }
+
+const TdBatchStat = ({ stat, batch }) => {
+  // either use the calculatedValue, or
+  // the key from the batch.
+  const value =
+    typeof stat.calculatedValue === "function"
+      ? stat.calculatedValue(batch)
+      : batch[stat.key];
+
+  // and maybe transform it.
+  const displayedValue =
+    typeof stat.transform === "function" ? stat.transform(value) : value;
+
+  return (
+    <td
+      className={`text-right font-mono text-base border p-2 bg-white ${
+        stat.highlight ? "bg-red-50" : ""
+      }`}
+    >
+      {displayedValue} {stat.unit}
+    </td>
+  );
+};
