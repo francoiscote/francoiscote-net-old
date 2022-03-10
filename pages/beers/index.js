@@ -54,10 +54,11 @@ export async function getServerSideProps({ req, res, query }) {
   // on properties names, because they are IDs
   // prettier-ignore
   const batchesColors = {
-    "KF4QB9uONI0xlmGZlFDMkSdynNAstr": "#a16452",
-    "WBkgeGLkfkwNOSV9pnD3zS6UkaTWou": "#ebc94f",
-    "i2E4ooAkLp8tkjKc1MCfygHvpRBB0N": "#f5b290",
-    "kCtZyLhBhBbSoNiIl8GkFiYXoCVQ8s": "#8aab60",
+    gY2KZyKLFhQxktMJcGjvs4mF0D3TUI: "#da9cdf",
+    KF4QB9uONI0xlmGZlFDMkSdynNAstr: "#a16452",
+    WBkgeGLkfkwNOSV9pnD3zS6UkaTWou: "#ebc94f",
+    i2E4ooAkLp8tkjKc1MCfygHvpRBB0N: "#f5b290",
+    kCtZyLhBhBbSoNiIl8GkFiYXoCVQ8s: "#8aab60",
     "2znilKPnYjmF6rLhAARCBuAkOdaOXM": "#a16452",
   };
 
@@ -162,7 +163,7 @@ export default function BeersPage({ beerStatuses }) {
       <NavBar />
 
       <main>
-        <h1> Beers 🍻</h1>
+        <h1>Beers 🍻</h1>
         <p className="lead">
           Sometimes, I brew beer.
           <br />

@@ -2,7 +2,7 @@ import { daysSince } from "../../lib/dates";
 import { formatKiloGrams } from "../../lib/strings";
 
 export const BeerCard = ({
-  absoluteId,
+  _id,
   brewDate,
   batchNo,
   batchFermentables,
@@ -27,6 +27,7 @@ export const BeerCard = ({
   return (
     <article
       key={`batch-${batchNo}`}
+      data-brewfather-id={_id}
       className="bg-gradient-to-br from-slate-100 to-slate-50 border border-gray-200 rounded-lg shadow-md p-4 md:p-6 mb-16"
     >
       <div className="md:grid grid-cols-12 gap-4 auto-rows-auto">
