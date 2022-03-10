@@ -1,8 +1,8 @@
 import Head from "next/head";
+import Link from "next/link";
 import NodeCache from "node-cache";
 
 import { NavBar } from "@components/NavBar";
-import { get } from "@lib/collections";
 
 const BREWFATHER_API_DOMAIN = "https://api.brewfather.app/v1";
 const CACHE_TTL = 5 * 60; // 5mins
@@ -115,8 +115,14 @@ export default function BeersPage({ batches }) {
   const stats = [
     {
       key: "measuredBatchSize",
-      label: "Batch Size",
+      label: "Batch Vol.",
       unit: "L",
+    },
+    {
+      key: "boilTime",
+      label: "Boil Time",
+      unit: "h",
+      calculatedValue: (b) => b.boilTime / 60,
     },
     {
       key: "measuredBoilSize",
@@ -129,23 +135,26 @@ export default function BeersPage({ batches }) {
       unit: "L",
     },
     {
-      key: "boilTime",
-      label: "Boil Time",
-      unit: "h",
-      transform: (b) => b / 60,
-    },
-    {
       key: "boilEvaporation",
-      label: "Evaporation Rate",
+      label: "Boil-off Rate",
       unit: "L/h",
       highlight: true,
       calculatedValue: (b) =>
-        (
-          (b.measuredBoilSize - b.measuredKettleSize) /
-          (b.boilTime / 60)
-        ).toPrecision(3),
+        (b.measuredBoilSize - b.measuredKettleSize) / (b.boilTime / 60),
     },
   ];
+
+  const dtf = new Intl.DateTimeFormat("en-CA");
+
+  const runningTotals = {};
+
+  const getStatValue = (stat, batch) => {
+    // either use the calculatedValue, or
+    // the key from the batch.
+    return typeof stat.calculatedValue === "function"
+      ? stat.calculatedValue(batch)
+      : batch[stat.key];
+  };
 
   return (
     <>
@@ -156,47 +165,73 @@ export default function BeersPage({ batches }) {
       <NavBar />
 
       <main>
-        <h1>Fementation Stats</h1>
+        <Link href="/beers">
+          <a className="block mb-8">← Beers</a>
+        </Link>
+        <h1>Fermentation Stats 🍻</h1>
 
         <table className="table-fixed w-full">
           <thead className="text-center">
             <tr>
               <th></th>
               {batches.map((b) => {
-                const dtf = new Intl.DateTimeFormat("en-CA");
-                // const formatedBrewDate = new Date(b.brewDate).toLocaleString();
                 return (
                   <th
                     key={`batch-${b._id}`}
-                    className="font-semibold border p-2 bg-slate-100"
+                    className="font-normal border p-2 bg-slate-100"
                   >
-                    {b.name} - #{b.batchNo}
+                    <span className="font-semibold">
+                      {b.name}
+                      <br />#{b.batchNo}
+                    </span>
                     <br />
-                    {dtf.format(b.brewDate)}
+                    <span className="text-slate-500">
+                      {dtf.format(b.brewDate)}
+                    </span>
                   </th>
                 );
               })}
+              <th className="font-semibold italic border p-2 bg-slate-100">
+                Averages
+              </th>
             </tr>
           </thead>
           <tbody>
-            {stats.map((s) => (
-              <tr key={`stat-${s.key}`}>
-                <td
-                  className={`font-semibold text-right border p-2 bg-slate-100 ${
-                    s.highlight ? "font-bold" : ""
-                  }`}
-                >
-                  {s.label}
-                </td>
-                {batches.map((b) => (
-                  <TdBatchStat
-                    key={`batch-${b._id}-stat-${s.key}`}
-                    stat={s}
-                    batch={b}
-                  />
-                ))}
-              </tr>
-            ))}
+            {stats.map((s) => {
+              let runningTotal = 0;
+              return (
+                <tr key={`stat-${s.key}`}>
+                  <td
+                    className={`font-semibold text-right border p-2 bg-slate-100 ${
+                      s.highlight ? "font-bold" : ""
+                    }`}
+                  >
+                    {s.label}
+                  </td>
+                  {batches.map((b) => {
+                    const val = getStatValue(s, b);
+                    runningTotal += val;
+                    return (
+                      <td
+                        key={`batch-${b._id}-stat-${s.key}`}
+                        className={`text-right font-mono text-base border p-2 bg-white ${
+                          s.highlight ? "bg-red-50" : ""
+                        }`}
+                      >
+                        {val.toPrecision(3)} {s.unit}
+                      </td>
+                    );
+                  })}
+                  <td
+                    className={`font-semibold italic text-right border p-2 bg-slate-100 ${
+                      s.highlight ? "bg-red-50" : ""
+                    }`}
+                  >
+                    {(runningTotal / batches.length).toPrecision(3)} {s.unit}
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
         <ul></ul>
@@ -204,26 +239,3 @@ export default function BeersPage({ batches }) {
     </>
   );
 }
-
-const TdBatchStat = ({ stat, batch }) => {
-  // either use the calculatedValue, or
-  // the key from the batch.
-  const value =
-    typeof stat.calculatedValue === "function"
-      ? stat.calculatedValue(batch)
-      : batch[stat.key];
-
-  // and maybe transform it.
-  const displayedValue =
-    typeof stat.transform === "function" ? stat.transform(value) : value;
-
-  return (
-    <td
-      className={`text-right font-mono text-base border p-2 bg-white ${
-        stat.highlight ? "bg-red-50" : ""
-      }`}
-    >
-      {displayedValue} {stat.unit}
-    </td>
-  );
-};
