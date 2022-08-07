@@ -168,7 +168,7 @@ export default function BeersPage({ batches }) {
         <Link href="/beers">
           <a className="block mb-8">← Beers</a>
         </Link>
-        <h1>Fermentation Stats 🍻</h1>
+        <h1>Fermentation Stats 🧪🔬👨🏻‍🔬</h1>
 
         <table className="table-fixed w-full">
           <thead className="text-center">
