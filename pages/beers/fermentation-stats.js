@@ -110,8 +110,6 @@ export async function getServerSideProps({ req, res, query }) {
 }
 
 export default function BeersPage({ batches }) {
-  console.log(batches);
-
   const stats = [
     {
       key: "measuredBatchSize",
@@ -119,15 +117,15 @@ export default function BeersPage({ batches }) {
       unit: "L",
     },
     {
+      key: "measuredBoilSize",
+      label: "Pre-Boil Vol.",
+      unit: "L",
+    },
+    {
       key: "boilTime",
       label: "Boil Time",
       unit: "h",
       calculatedValue: (b) => b.boilTime / 60,
-    },
-    {
-      key: "measuredBoilSize",
-      label: "Pre-Boil Vol.",
-      unit: "L",
     },
     {
       key: "measuredKettleSize",
@@ -174,46 +172,38 @@ export default function BeersPage({ batches }) {
           <thead className="text-center">
             <tr>
               <th></th>
-              {batches.map((b) => {
+              {stats.map((s) => {
+                runningTotals[s.key] = 0;
                 return (
                   <th
-                    key={`batch-${b._id}`}
+                    key={`stats-${s.key}`}
                     className="font-normal border p-2 bg-slate-100"
                   >
+                    <span className="font-semibold">{s.label}</span>
+                  </th>
+                );
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {batches.map((b) => {
+              return (
+                <tr key={`batch-${b._id}`}>
+                  <td className={`text-right border p-2 bg-slate-100`}>
                     <span className="font-semibold">
-                      {b.name}
-                      <br />#{b.batchNo}
+                      {b.name} #{b.batchNo}
                     </span>
                     <br />
                     <span className="text-slate-500">
                       {dtf.format(b.brewDate)}
                     </span>
-                  </th>
-                );
-              })}
-              <th className="font-semibold italic border p-2 bg-slate-100">
-                Averages
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {stats.map((s) => {
-              let runningTotal = 0;
-              return (
-                <tr key={`stat-${s.key}`}>
-                  <td
-                    className={`font-semibold text-right border p-2 bg-slate-100 ${
-                      s.highlight ? "font-bold" : ""
-                    }`}
-                  >
-                    {s.label}
                   </td>
-                  {batches.map((b) => {
+                  {stats.map((s) => {
                     const val = getStatValue(s, b);
-                    runningTotal += val;
+                    runningTotals[s.key] += val;
                     return (
                       <td
-                        key={`batch-${b._id}-stat-${s.key}`}
+                        key={`stat-${s.key}-batch-${b._id}`}
                         className={`text-right font-mono text-base border p-2 bg-white ${
                           s.highlight ? "bg-red-50" : ""
                         }`}
@@ -222,16 +212,29 @@ export default function BeersPage({ batches }) {
                       </td>
                     );
                   })}
-                  <td
-                    className={`font-semibold italic text-right border p-2 bg-slate-100 ${
-                      s.highlight ? "bg-red-50" : ""
-                    }`}
-                  >
-                    {(runningTotal / batches.length).toPrecision(3)} {s.unit}
-                  </td>
                 </tr>
               );
             })}
+            <tr>
+              <td
+                className={`font-semibold text-right border p-2 bg-slate-100`}
+              >
+                Average
+              </td>
+              {stats.map((s) => {
+                const val = runningTotals[s.key] / batches.length;
+                return (
+                  <td
+                    key={`stat-${s.key}-batch-average`}
+                    className={`text-right font-mono text-base border p-2 bg-white ${
+                      s.highlight ? "bg-red-50" : ""
+                    }`}
+                  >
+                    {val.toPrecision(3)} {s.unit}
+                  </td>
+                );
+              })}
+            </tr>
           </tbody>
         </table>
         <ul></ul>
