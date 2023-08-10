@@ -13,6 +13,13 @@ main {
   flex: auto;
 }
 
+h1,
+h2,
+h3 {
+  letter-spacing: -0.05em;
+  line-height: 1.1;
+}
+
 h1 {
   margin-bottom: var(--size-12);
   font-size: var(--size-6);

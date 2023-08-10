@@ -77,17 +77,5 @@ module.exports = async function () {
     return batch;
   });
 
-  // Group by Status
-  const beersByStatus = {
-    planning: [],
-    brewing: [],
-    fermenting: [],
-    conditioning: [],
-    completed: [],
-  };
-  data.forEach((item) => {
-    const key = item.status.toLowerCase();
-    beersByStatus[key].push(item);
-  });
-  return { beersByStatus };
+  return { beers: data };
 };

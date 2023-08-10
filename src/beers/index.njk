@@ -1,9 +1,8 @@
 ---
 layout: layouts/page.njk
-title: Beers - francoiscote.net
+title: Beers 🍻
 ---
 {% block content %}
-  <h1>Beers 🍻</h1>
   <p class="lead">
     Sometimes, I brew beer.
     <br />
@@ -12,13 +11,13 @@ title: Beers - francoiscote.net
 
   <p>You can also have a look at the detailed <a href="/beers/fermentation-stats">fermentation stats</a> I use to calibrate my equipment profile.</p>
   
-  {% for status, beers in beersByStatus %}
+  {% for status, beers in beers | groupby("status") %}
     {% if beers.length %}
     <section>
       <h3>{{ status | capitalize }}</h3>
       <ul>
         {% for beer in beers %}
-          {% include "partials/beer-card.njk" %}
+          <li>{% include "partials/beer-card.njk" %}</li>
         {% endfor %}
       </ul>
     </section>
