@@ -6,8 +6,8 @@
     "node": "18.x"
   },
   "scripts": {
-    "build": "npm run clean && npx @11ty/eleventy",
-    "dev": "npm run clean && npx @11ty/eleventy --serve --quiet --incremental",
+    "build": "npx @11ty/eleventy",
+    "dev": "npx @11ty/eleventy --serve --quiet --incremental",
     "debug": "DEBUG=Eleventy* npm run build",
     "benchmark": "DEBUG=Eleventy:Benchmark* npm run build",
     "clean": "rm -rf dist/*"
