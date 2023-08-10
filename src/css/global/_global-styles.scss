@@ -1,0 +1,180 @@
+body {
+  background-color: var(--color-light);
+  color: var(--color-dark);
+  font-size: var(--size-base);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: auto;
+}
+
+h1 {
+  margin-bottom: var(--size-12);
+  font-size: var(--size-6);
+}
+
+h2 {
+  font-size: var(--size-5);
+  font-weight: bold;
+}
+
+h3 {
+  font-size: var(--size-4);
+  font-weight: bold;
+}
+
+h4 {
+  font-size: var(--size-3);
+  font-weight: 600;
+}
+
+h5 {
+  font-size: var(--size-2);
+  font-weight: 600;
+}
+
+h6 {
+  font-size: var(--size-1);
+  font-weight: 600;
+}
+
+p {
+  margin-bottom: var(--size-6);
+}
+
+.lead {
+  font-size: var(--size-2);
+}
+
+.subtle {
+  color: var(--color-mid);
+}
+
+strong {
+  font-weight: 600;
+}
+
+a {
+  color: var(--color-secondary);
+  @include transition(color);
+}
+a:hover {
+  text-decoration: underline;
+}
+
+svg {
+  width: 1em;
+  height: 1em;
+}
+
+img {
+  height: auto;
+}
+
+img[src*=".svg"] {
+  width: 100%;
+}
+
+[role="list"] {
+  padding: 0;
+  margin-bottom: 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--color-mid);
+  transform: translateY(-1px);
+  margin: var(--space-l-xl) 0 !important;
+  max-width: 55rem;
+}
+
+:focus-visible {
+  outline: 1px dotted var(--color-dark);
+  outline-offset: 0.25rem;
+}
+
+main:focus {
+  outline: none;
+}
+
+code {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 1em;
+  hyphens: none;
+  tab-size: 2;
+  text-align: left;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+pre {
+  padding: var(--size-2);
+  background: var(--color-dark);
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+pre code {
+  color: var(--color-light);
+}
+
+dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--size-4) var(--size-2);
+}
+
+dt {
+  font-weight: 700;
+}
+
+/* form elements */
+label::after {
+  content: "\A";
+  white-space: pre;
+}
+
+:is(input:not([type="checkbox"]):not([type="radio"]), textarea) {
+  padding: 0.3em;
+  background: transparent;
+  font: inherit;
+  border: 1px solid var(--color-mid);
+  width: 100%;
+}
+
+textarea {
+  display: block;
+}
+
+textarea:not([rows]) {
+  min-height: 20rem;
+}
+
+button {
+  display: inline-block;
+  font: inherit;
+  padding: 0.3em 1em;
+  border: 1px solid var(--color-mid);
+  background: var(--color-primary);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: var(--color-mid);
+}
+
+::selection {
+  background: var(--color-dark);
+  color: var(--color-light);
+}

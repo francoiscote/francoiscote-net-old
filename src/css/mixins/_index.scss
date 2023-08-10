@@ -1,0 +1,57 @@
+@import "screen";
+@import "transitions";
+
+@mixin nav-hover {
+  text-decoration: none;
+  @include transition(opacity);
+  &:hover {
+    opacity: 0.5;
+  }
+}
+
+@mixin pill($size: default, $variant: default) {
+  padding-inline: var(--space-3);
+  background: var(--color-primary);
+  color: var(--color-light);
+  border-radius: 100%;
+  text-align: center;
+  font-size: var(--size-3);
+
+  @if $size == small {
+    font-size: var(--size--1);
+  }
+
+  @if $size == large {
+    font-size: var(--size-5);
+  }
+
+  @if $variant == secondary {
+    background: var(--color-light);
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+  }
+}
+
+@mixin circle($size: default) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-m);
+  height: var(--space-m);
+  background: var(--color-primary);
+  color: var(--color-light);
+  border-radius: var(--rounded-fullPerc);
+  font-size: var(--size-3);
+
+  @if $size == small {
+    width: var(--space-xs);
+    height: var(--space-xs);
+    font-size: var(--size--1);
+  }
+
+  @if $size == large {
+    width: var(--space-xl);
+    height: var(--space-xl);
+    font-size: var(--size-6);
+  }
+}

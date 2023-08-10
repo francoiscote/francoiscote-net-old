@@ -1,0 +1,81 @@
+<html lang="{{ site.language }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ title or site.title }}</title>
+    <meta
+      name="description"
+      content="{{ description or site.description }}"
+    />
+
+    <!-- Atom and JSON feeds included by default -->
+    <link
+      rel="alternate"
+      href="/feed/feed.xml"
+      type="application/atom+xml"
+      title="{{ site.title }}"
+    />
+    <link
+      rel="alternate"
+      href="/feed/feed.json"
+      type="application/json"
+      title="{{ site.title }}"
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="true"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-3186767-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-3186767-1");
+    </script>
+
+    <!-- Favicons -->
+    <link rel="icon" href="/img/favicon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/img/favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/img/favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/img/favicon/favicon-16x16.png"
+    />
+
+    <link rel="stylesheet" href="/css/index.css" />
+  </head>
+  <body>
+    {% include "partials/site-head.njk" %}
+    
+    <main id="main">
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>

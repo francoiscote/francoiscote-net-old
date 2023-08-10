@@ -1,0 +1,11 @@
+{
+  "title": "francoiscote.net",
+  "url": "https://francoiscote.net",
+  "language": "en",
+  "description": "Bonjour, My name is François Côté, and I am a Web Developer based in Montréal (QC), Canada.",
+  "author": {
+    "name": "François Côté",
+    "email": "francois@francoiscote.net",
+    "url": "https://francoiscote.net"
+  }
+}

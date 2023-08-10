@@ -1,10 +1,10 @@
 ## francoiscote.net
 
-My personal website..
+My personal website.
 
 ## Built with
 
-- [Next.js](https://nextjs.org/)
-- [Vercel](https://vercel.com/)
-- [Tailwind CSS](https://tailwindcss.com/)
+- [Eleventy](https://11ty.dev/)
+- [Sass](https://sass-lang.com/)
 - Emoji icons from [twemoji](https://github.com/twitter/twemoji)
+- Hosted on [Vercel](https://vercel.com/)
