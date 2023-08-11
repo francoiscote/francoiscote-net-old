@@ -1,11 +1,11 @@
-<html lang="{{ site.language }}">
+<html lang="{{ metadata.language }}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ title or site.title }}</title>
+    <title>{{ title or metadata.title }}</title>
     <meta
       name="description"
-      content="{{ description or site.description }}"
+      content="{{ description or metadata.description }}"
     />
 
     <!-- Atom and JSON feeds included by default -->
@@ -13,13 +13,13 @@
       rel="alternate"
       href="/feed/feed.xml"
       type="application/atom+xml"
-      title="{{ site.title }}"
+      title="{{ metadata.title }}"
     />
     <link
       rel="alternate"
       href="/feed/feed.json"
       type="application/json"
-      title="{{ site.title }}"
+      title="{{ metadata.title }}"
     />
 
     <!-- Google Fonts -->
