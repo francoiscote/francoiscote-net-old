@@ -15,7 +15,7 @@ module.exports = (config) => {
   config.addFilter("dateFilter", dateFilter);
   config.addFilter("w3DateFilter", w3DateFilter);
 
-  config.addPassthroughCopy("images");
+  config.addPassthroughCopy("src/images");
 
   return {
     dir: {
