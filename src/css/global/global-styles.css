@@ -68,7 +68,7 @@ strong {
 
 a {
   color: var(--color-secondary);
-  @include transition(color);
+  transition: color var(--transition-fade);
 }
 a:hover {
   text-decoration: underline;

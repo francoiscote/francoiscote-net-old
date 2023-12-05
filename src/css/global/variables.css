@@ -55,9 +55,10 @@
   --border-radius-inner: 0.25rem;
 
   /* Transitions */
-  --properties-appear: (opacity, transform);
-  --properties-rounded: border-radius;
-  --properties-visibility: visibility;
+  --transition-base: 250ms ease;
+  --transition-movement: 200ms linear;
+  --transition-fade: 200ms ease;
+
   --timing-in-out-pangram: cubic-bezier(0.075, 0.82, 0.165, 1);
   --timing-in-out-default: cubic-bezier(0.4, 0, 0.2, 1);
   --timing-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
