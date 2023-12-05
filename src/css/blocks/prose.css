@@ -1,20 +1,18 @@
 .prose {
   --flow-space: var(--size-4);
-
   max-width: 50rem;
-
-  & > img,
-  & > table {
-    width: 100%;
+}
+@media screen(md) {
+  .prose :is(ul, ol) {
+    padding-inline-start: 0.15ch;
   }
+}
 
-  .prose li + li {
-    margin-top: var(--size-2);
-  }
+.prose > img,
+.prose > table {
+  width: 100%;
+}
 
-  @media screen(md) {
-    .prose :is(ul, ol) {
-      padding-inline-start: 0.15ch;
-    }
-  }
+.prose li + li {
+  margin-top: var(--size-2);
 }

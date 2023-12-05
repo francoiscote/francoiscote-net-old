@@ -1,6 +1,4 @@
-.post-card {
-  &__time {
-    font-size: var(--size--1);
-    font-weight: normal;
-  }
+.post-card__time {
+  font-size: var(--size--1);
+  font-weight: normal;
 }

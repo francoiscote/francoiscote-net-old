@@ -1,39 +1,39 @@
 .home {
   text-align: center;
+}
+.home__content {
+  margin-bottom: var(--space-xl);
+}
 
-  &__content {
-    margin-bottom: var(--size-12);
-  }
+.home__links {
+  display: flex;
+  justify-content: center;
+}
 
-  &__links {
-    display: flex;
-    justify-content: center;
-  }
-  &__link {
-    margin-inline: var(--size-4);
-    color: var(--color-mid);
+.home__link {
+  margin-inline: var(--size-4);
+  color: var(--color-mid);
 
-    transition: color var(--transition-fade);
-    &:hover {
-      color: var(--color-mid-shade);
-    }
+  transition: color var(--transition-fade);
+}
+.home__link:hover {
+  color: var(--color-mid-shade);
+}
 
-    &--beer {
-      font-size: var(--size-2);
-      margin-top: -0.5em;
-      text-decoration: none;
-      opacity: 0.7;
+.home__link--beer {
+  font-size: var(--size-2);
+  margin-top: -0.5em;
+  text-decoration: none;
+  opacity: 0.7;
 
-      transition: opacity var(--transition-fade);
-      &:hover {
-        opacity: 1;
-      }
-    }
-  }
+  transition: opacity var(--transition-fade);
+}
+.home__link--ber:hover {
+  opacity: 1;
+}
 
-  &__GHIcon {
-    width: var(--size-3);
-    height: var(--size-3);
-    transition: color var(--transition-fade);
-  }
+.home__GHIcon {
+  width: var(--size-3);
+  height: var(--size-3);
+  transition: color var(--transition-fade);
 }

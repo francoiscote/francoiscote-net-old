@@ -28,7 +28,7 @@ module.exports = async function () {
     "tasteRating",
     "tasteNotes",
   ];
-  const endpoint = `https://api.brewfather.app/v1/batches?include=${includes.join(
+  const endpoint = `https://api.brewfather.app/v1/batches?limit=30&include=${includes.join(
     ","
   )}`;
 
@@ -48,6 +48,7 @@ module.exports = async function () {
     duration: "1d", // save for 1 day
     type: "json", // we’ll parse JSON for you
     fetchOptions: { headers },
+    removeUrlQueryParams: true,
   });
 
   /**
@@ -75,6 +76,14 @@ module.exports = async function () {
     });
 
     return batch;
+  });
+
+  // Sort by Status and Brew Date
+  data.sort((a, b) => {
+    if (a.status === b.status) {
+      return new Date(b.brewDate) - new Date(a.brewDate);
+    }
+    return a.status > b.status ? -1 : 1;
   });
 
   return { beers: data };

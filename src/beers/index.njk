@@ -11,15 +11,17 @@ title: Beers 🍻
 
   <p>You can also have a look at the detailed <a href="/beers/fermentation-stats">fermentation stats</a> I use to calibrate my equipment profile.</p>
   
+  <p className="subtle">* This is an affiliate link, but I truly love this product</p>
+  
   {% for status, beers in beers | groupby("status") %}
     {% if beers.length %}
     <section>
       <h3>{{ status | capitalize }}</h3>
-      <ul>
+      <div class="stack">
         {% for beer in beers %}
-          <li>{% include "partials/beer-card.njk" %}</li>
+          {% include "partials/beer-card.njk" %}
         {% endfor %}
-      </ul>
+      </div>
     </section>
     {% endif %}
   {% endfor %}

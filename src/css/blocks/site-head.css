@@ -1,22 +1,21 @@
 .site-head {
-  .stretch {
-    --gutter: 0.5rem var(--space-m);
-    padding-block: var(--space-m);
-  }
+}
+.site-head .stretch {
+  --gutter: 0.5rem var(--space-m);
+  padding-block: var(--space-m);
+}
+.site-head nav ul {
+  margin: 0;
+}
 
-  nav ul {
-    margin: 0;
-  }
+.site-head__title {
+  font-size: var(--size-2);
+  font-weight: bold;
+  letter-spacing: -0.03em;
+  color: var(--color-mid);
+  text-decoration: none;
+}
 
-  &__title {
-    font-size: var(--size-2);
-    font-weight: bold;
-    letter-spacing: -0.03em;
-    color: var(--color-mid);
-    text-decoration: none;
-
-    &:hover {
-      color: var(--color-secondary);
-    }
-  }
+.site-head__title:hover {
+  color: var(--color-secondary);
 }

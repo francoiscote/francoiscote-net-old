@@ -15,6 +15,10 @@ module.exports = (config) => {
 
   config.addPassthroughCopy("src/images");
 
+  config.setServerOptions({
+    watch: ["dist/css/**/*.css"],
+  });
+
   return {
     dir: {
       input: "src",

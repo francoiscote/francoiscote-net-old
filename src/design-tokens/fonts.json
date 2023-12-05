@@ -1,0 +1,53 @@
+{
+  "title": "Fonts",
+  "description": "Each array of fonts creates a priority-based order. The first font in the array should be the ideal font, followed by sensible, web-safe fallbacks",
+  "items": [
+    {
+      "name": "Sans",
+      "description": "Sans Fonts",
+      "value": [
+        "Manrope",
+        "ui-sans-serif",
+        "system-ui",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "\"Segoe UI\"",
+        "Roboto",
+        "\"Helvetica Neue\"",
+        "Arial",
+        "\"Noto Sans\"",
+        "sans-serif",
+        "\"Apple Color Emoji\"",
+        "\"Segoe UI Emoji\"",
+        "\"Segoe UI Symbol\"",
+        "\"Noto Color Emoji\""
+      ]
+    },
+    {
+      "name": "Serif",
+      "description": "Serif Fonts",
+      "value": [
+        "ui-serif",
+        "Georgia",
+        "Cambria",
+        "\"Times New Roman\"",
+        "Times",
+        "serif"
+      ]
+    },
+    {
+      "name": "Mono",
+      "description": "Mono Fonts",
+      "value": [
+        "ui-monospace",
+        "SFMono-Regular",
+        "Menlo",
+        "Monaco",
+        "Consolas",
+        "\"Liberation Mono\"",
+        "\"Courier New\"",
+        "monospace"
+      ]
+    }
+  ]
+}
