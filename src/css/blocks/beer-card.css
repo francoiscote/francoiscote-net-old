@@ -1,0 +1,10 @@
+.beer-card {
+  border: var(--color-mid-glare) 1px solid;
+  border-radius: var(--border-radius);
+}
+
+.beer-card__sup {
+  font-size: var(--size-small-2);
+  color: var(--color-mid);
+  text-transform: uppercase;
+}
